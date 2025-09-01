@@ -1,0 +1,26 @@
+Package: Rfuzzycoco
+Type: Package
+Title: Provides an R Interface to the FuzzyCoco C++ Library and extends it
+Version: 1.0
+Date: 2025-04-18
+Authors@R: person("Karl", "Forner", role = c("aut", "cre"), email ="karl.forner@gmail.com")
+Description: Provides an R Interface to the FuzzyCoco C++ Library and extends it.
+SystemRequirements: C++17
+License: GPL (>= 2)
+Imports:
+  generics,
+  methods,
+  Rcpp,
+  stats,
+  utils
+Suggests:
+  jsonlite,
+  parsnip,
+  progressr,
+  rlang,
+  testthat,
+  tibble
+LinkingTo: Rcpp
+Encoding: UTF-8
+RoxygenNote: 7.3.2
+Roxygen: list(markdown = TRUE)
