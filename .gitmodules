@@ -1,0 +1,3 @@
+[submodule "src/fuzzycoco"]
+	path = src/fuzzycoco
+	url = ../fuzzycoco

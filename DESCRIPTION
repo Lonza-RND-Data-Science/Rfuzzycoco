@@ -7,6 +7,8 @@ Authors@R: person("Karl", "Forner", role = c("aut", "cre"), email ="karl.forner@
 Description: Provides an R Interface to the FuzzyCoco C++ Library and extends it.
 SystemRequirements: C++17
 License: GPL (>= 2)
+Depends:
+  R (>= 4.1.0)
 Imports:
   generics,
   methods,

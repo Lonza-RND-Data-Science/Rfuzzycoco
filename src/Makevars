@@ -1,0 +1,33 @@
+### This Makevars is intended to compile the fuzzycoco c++ source files from a subfolder, and put the objects files in a different folder
+# it avoids using a configure system. We stick to non Gnu-make extensions for better portability
+# The Makevars is read by the Makefile
+
+# where to find the Fuzzy Coco C++ source files
+FUZZYCOCO_SRC=fuzzycoco/src
+
+PKG_CPPFLAGS=-I. -I$(FUZZYCOCO_SRC)
+# PKG_CXXFLAGS = -g -O0
+# PKG_CXXFLAGS:=-g -O2
+
+# this is our lib
+PKG_LIBS= libfuzzycoco.a
+
+all: $(SHLIB)
+	echo "====================== all ================"
+
+# # Provide recipe to remove all objects
+clean:
+	rm -f $(OBJECTS) libfuzzycoco.a Rfuzzycoco.so*
+	rm -rf $(OBJS)
+
+
+$(SHLIB): libfuzzycoco.a
+
+
+
+# where we compile the fuzzycoco sources
+OBJS=$(PWD)/objs
+libfuzzycoco.a:
+	mkdir -p $(OBJS)
+	(cd $(FUZZYCOCO_SRC); for source in *.cpp; do echo "compiling $$source..."; $(CXX) -c $(PKG_CXXFLAGS) $(PKG_CPPFLAGS) -fPIC $$source -I. -o $(OBJS)/$$source.o; done);
+	$(CXX) -r objs/*.o -o libfuzzycoco.a

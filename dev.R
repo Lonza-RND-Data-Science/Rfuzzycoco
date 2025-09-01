@@ -1,5 +1,5 @@
 library(devtools)
-load_all("Rfuzzycoco")
+load_all()
 
 document("Rfuzzycoco")
 
