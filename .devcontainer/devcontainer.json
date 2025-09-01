@@ -1,0 +1,16 @@
+
+{
+	"name": "Fuzzy Coco Dev",
+	"dockerFile": "Dockerfile",
+	"customizations": {
+		// Configure properties specific to VS Code.
+		"vscode": {
+		  // Add the IDs of extensions you want installed when the container is created.
+		  "extensions": [
+        "ms-vscode.cpptools-extension-pack",
+        "reditorsupport.r",
+        "rdebugger.r-debugger"
+      ]
+		}
+  }
+}
