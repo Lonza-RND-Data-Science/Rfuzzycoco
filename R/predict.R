@@ -10,7 +10,6 @@ predict.fuzzycoco_fit <- function(object, x, verbose = FALSE, bin = TRUE, ...)
   y
 }
 
-#' @export
 predict_fuzzy_system <- function(fuzzy_system, x, verbose = FALSE) {
   rcpp_fuzzy_coco_predict(x, fuzzy_system, verbose = verbose)
 }

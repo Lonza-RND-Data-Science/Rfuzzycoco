@@ -30,7 +30,7 @@ fuzzy_coco_systematic_fit <- function(x, y, params, fitter) {
   grid <- make_rules_grid(nb_rules, invars, outvars, nb_max_var_per_rule, 
     params$input_vars_params$nb_sets, params$output_vars_params$nb_sets)
 
-  progressr <- require("progressr")
+  progressr <- requireNamespace("progressr")
   p <- NULL
   if (progressr) p <- progressr::progressor(nrow(grid))
 
@@ -136,7 +136,7 @@ make_sets_grid <- function(vars, nb_var_per_rule, nb_sets_per_var) {
   sets <- lapply(seq_along(vars), \(i) c(paste0(vars[i], ".", seq_len(nb_sets_per_var[i]))))
   names(sets) <- vars
 
-  vars_combn <- combn(vars, nb_var_per_rule, simplify = FALSE)
+  vars_combn <- utils::combn(vars, nb_var_per_rule, simplify = FALSE)
   .process_selected_vars <- function(selected_vars) {
     df <- do.call(expand.grid, c(sets[selected_vars], stringsAsFactors = FALSE))
     names(df) <- paste0("set", seq_along(df))

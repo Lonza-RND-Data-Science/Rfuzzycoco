@@ -19,6 +19,11 @@ You can install the development version of Rfuzzycoco like so:
 # FILL THIS IN! HOW CAN PEOPLE INSTALL YOUR DEV PACKAGE?
 ```
 
+## Local setup
+
+- clone the repo
+- get the submodule: `git submodule update --init`
+
 ## Example
 
 This is a basic example which shows you how to solve a common problem:

@@ -8,37 +8,42 @@ new_hybrid_engine <- function(data, nb_out_vars, params, seed, verbose = FALSE) 
 
 start_engine <- function(engine) { engine$start() }
 
-#' computes the next fuzzycoco generation from the current one
-#' @return the objective value for this new generation
+# computes the next fuzzycoco generation from the current one
+# @return the objective value for this new generation
 # return the objective value for the 
 compute_next_generation <- function(engine) {
   engine$next_gen() 
 }
 
-#' describes the best fuzzy system evaluated so far
-#' @return the best fuzzy system as a named list
+# describes the best fuzzy system evaluated so far
+# @return the best fuzzy system as a named list
 describe_best_system <- function(engine) {
   engine$describeBestSystem() 
 }
 
-#' describes the current generation
-#' @return the current generation as a named list
+# describes the current generation
+# @return the current generation as a named list
 describe_current_generation <- function(engine) {
   engine$describeCurrentGeneration() 
 }
 
-#' get the current generation number
-#' @return the number as an integer
+# get the current generation number
+# @return the number as an integer
 get_current_generation_nb <- function(engine) {
   engine$getCurrentGenerationNb()
 }
 
-#' get the current generation fitness
-#' @return the fitness as a numeric
+# get the current generation fitness
+# @return the fitness as a numeric
 get_current_generation_fitness <- function(engine) {
   engine$getCurrentFitness()
 }
 
+#' lowest-level implementation of the fitting of a fuzzy coco model using the **hynrid engine**
+#' 
+#' @return a named list as a `fuzzy_coco` fit object
+#' @inheritParams shared_params
+#' @export
 fuzzycoco_fit_df_hybrid <- function(model, x, y, 
   until = stop_engine_on_first_of(
     max_generations = model$params$global_params$max_generations, 
@@ -48,7 +53,7 @@ fuzzycoco_fit_df_hybrid <- function(model, x, y,
   stop_unless(length(model$params$fitness_params$output_vars_defuzz_thresholds) == ncol(y),
     "bad params$fitness_params$output_vars_defuzz_thresholds, must be defined for all output vars")
 
-  progressr <- require("progressr")
+  progressr <- requireNamespace("progressr")
   max_gen <- until() %||% model$params$global_params$max_generations
   p <- NULL
   if (progressr) p <- progressr::progressor(max_gen)
@@ -77,6 +82,7 @@ fuzzycoco_fit_df_hybrid <- function(model, x, y,
   infos <- list(iterations = it)
   new_fuzzycoco_fit(res, mode = model$mode, engine = FUZZY_COCO_HYBRID_ENGINE, seed = model$seed, infos = infos)
 }
+
 
 stop_engine_on_first_of <- function(max_generations = NULL, max_fitness = NULL, other_func = NULL) {
   stop_if(!length(max_generations) && !length(max_fitness) && !length(other_func), 

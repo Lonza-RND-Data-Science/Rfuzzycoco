@@ -9,23 +9,17 @@ lst_convert <- function(lst) {
     .Call(`_Rfuzzycoco_lst_convert`, lst)
 }
 
-#' FuzzyCoco::eval()
-#' @return a data.frame
-#' @export
+# FuzzyCoco::eval()
 rcpp_fuzzy_coco_eval <- function(df, fuzzy_system_desc, params, verbose = FALSE) {
     .Call(`_Rfuzzycoco_rcpp_fuzzy_coco_eval`, df, fuzzy_system_desc, params, verbose)
 }
 
-#' FuzzyCoco::loadAndPredict()
-#' @return a data.frame
-#' @export
+# FuzzyCoco::loadAndPredict()
 rcpp_fuzzy_coco_predict <- function(df, fuzzy_system_desc, verbose = FALSE) {
     .Call(`_Rfuzzycoco_rcpp_fuzzy_coco_predict`, df, fuzzy_system_desc, verbose)
 }
 
-#' FuzzyCoco::searchBestFuzzySystem()
-#' @return a list
-#' @export
+# FuzzyCoco::searchBestFuzzySystem()
 rcpp_fuzzy_coco_searchBestFuzzySystem <- function(df, nb_out_vars, params, seed = 123L, verbose = FALSE) {
     .Call(`_Rfuzzycoco_rcpp_fuzzy_coco_searchBestFuzzySystem`, df, nb_out_vars, params, seed, verbose)
 }

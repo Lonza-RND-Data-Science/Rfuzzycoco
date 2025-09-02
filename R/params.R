@@ -20,7 +20,14 @@ complete_params_with_defaults <- function(lst) {
   utils::modifyList(defaults, lst)
 }
 
-
+#' utility to build the Fuzzy Coco parameters data structure
+#' @param nb_rules              (mandatory) the number of rules in the fuzzy system
+#' @param nb_max_var_per_rule   (mandatory) The maximum number of antecedents (input variables) to use in each rule.
+#' @param max_generations,max_fitness,nb_cooperators,influence_rules_initial_population,influence_evolving_ratio,ivars.nb_sets,ivars.nb_bits_vars,ivars.nb_bits_sets,ivars.nb_bits_pos,ovars.nb_sets,ovars.nb_bits_vars,ovars.nb_bits_sets,ovars.nb_bits_pos,rules.pop_size,rules.elite_size,rules.cx_prob,rules.mut_flip_genome,rules.mut_flip_bit,mfs.pop_size,mfs.elite_size,mfs.cx_prob,mfs.mut_flip_genome,mfs.mut_flip_bit,output_vars_defuzz_thresholds,metricsw.sensitivity,metricsw.specificity,metricsw.accuracy,metricsw.ppv,metricsw.rmse,metricsw.rrse,metricsw.rae,metricsw.mse,metricsw.distanceThreshold,metricsw.distanceMinThreshold,metricsw.nb_vars,metricsw.overLearn,metricsw.true_positives,metricsw.false_positives,metricsw.true_negatives,metricsw.false_negatives,features_weights
+#'  cf [fuzzycoco doc](https://github.com/Lonza-RND-Data-Science/fuzzycoco/blob/main/PARAMS.md)
+#' 
+#' @return a nested named list
+#' @export
 params <- function(nb_rules, nb_max_var_per_rule, 
   max_generations = 100,
   max_fitness = 1,

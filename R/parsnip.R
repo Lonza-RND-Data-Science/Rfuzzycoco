@@ -5,6 +5,8 @@
 FUZZY_COCO_MODEL <- "fuzzy_coco"
 
 #' parsnip model function
+#' 
+#' @inheritParams shared_params
 #' @export
 fuzzy_coco_parsnip <- function(mode = "unknown", params, 
   engine = FUZZY_COCO_HYBRID_ENGINE, seed = sample.int(10^5, 1), verbose = FALSE) 
@@ -26,8 +28,14 @@ fuzzy_coco_parsnip <- function(mode = "unknown", params,
   )
 }
 
+#' this is an utility function used to implement the parsnip interface
+#' 
+#' It should not be exported, it only is because of parsnip internal implementation
+#' @param object,internal_model,fit,df,pred,type,... no comment
+#' @inheritParams shared_params
 #' @export
-fuzzy_coco_parsnip_wrapper <- function(formula, data, object = NULL, internal_model = NULL, engine = NULL, fit = NULL, df = NULL, pred = FALSE, type = NULL, ...) {
+fuzzy_coco_parsnip_wrapper <- function(formula, data, object = NULL, internal_model = NULL, engine = NULL, 
+  fit = NULL, df = NULL, pred = FALSE, type = NULL, ...) {
 
   if (!pred) {
     return(fit(internal_model, formula, data, engine = engine, ...))
@@ -133,6 +141,9 @@ register_parsnip_fits <- function() {
 
 
 register_parsnip_preds <- function() {
+  # fix R CMD check warning: no visible binding for global variable xxx
+  new_data <- object <- NULL
+
   for (engine in FUZZY_COCO_ENGINES) {
     parsnip::set_pred(
       model = FUZZY_COCO_MODEL,

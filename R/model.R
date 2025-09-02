@@ -1,7 +1,12 @@
 CLASSIFICATION <- "classification"
 REGRESSION <- "regression"
 
-
+#'creates a model for the Fuzzy Coco algorithm
+#' 
+#' @inheritParams shared_params
+#' 
+#' @return a *fuzzycoco_model*  object (named list)
+#' @export
 fuzzycoco <- function(mode = c("classification", "regression"), params, seed = sample.int(10^5, 1), verbose = FALSE) {
   mode <- match.arg(mode)
 

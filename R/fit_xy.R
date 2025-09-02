@@ -1,5 +1,12 @@
 # N.B: classification is strictly for binary reponses (POSITIVE/NEGATIVE)
 # variables will be converted to 0/1, and if not set a threshold==0.5
+
+#' fit the FuzzyCoco model using the dataframe interface
+#' 
+#' @param object  the *fuzzycoco_model* object to fit
+#' @inheritDotParams fuzzycoco_fit_df_hybrid
+#' @inheritParams shared_params
+#' @return a named list
 #' @export
 fit_xy.fuzzycoco_model <- function(object, x, y, engine = FUZZY_COCO_HYBRID_ENGINE, 
   max_generations = object$params$global_params$max_generations, 

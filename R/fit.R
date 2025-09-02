@@ -3,6 +3,14 @@
 
 
 # N.B: fix_xy() is the workhorse, fit() is a simple formula-based layer
+
+#' fit the FuzzyCoco model using the formula interface
+#' 
+#' 
+#' @inherit fit_xy.fuzzycoco_model
+#' @inheritDotParams fit_xy.fuzzycoco_model 
+#' @inheritParams shared_params
+#' @return a named list 
 #' @export
 fit.fuzzycoco_model <- function(object, formula, data, engine = FUZZY_COCO_HYBRID_ENGINE, 
   max_generations = object$params$global_params$max_generations, 
