@@ -77,7 +77,6 @@ END_RCPP
 
 RcppExport SEXP _rcpp_module_boot_RcppCoevGeneration();
 RcppExport SEXP _rcpp_module_boot_RcppFuzzyCocoWrapper();
-RcppExport SEXP _rcpp_module_boot_RcppRandomGenerator();
 RcppExport SEXP _rcpp_module_boot_RcppFuzzySystem();
 
 static const R_CallMethodDef CallEntries[] = {
@@ -88,7 +87,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"_Rfuzzycoco_rcpp_fuzzy_coco_searchBestFuzzySystem", (DL_FUNC) &_Rfuzzycoco_rcpp_fuzzy_coco_searchBestFuzzySystem, 5},
     {"_rcpp_module_boot_RcppCoevGeneration", (DL_FUNC) &_rcpp_module_boot_RcppCoevGeneration, 0},
     {"_rcpp_module_boot_RcppFuzzyCocoWrapper", (DL_FUNC) &_rcpp_module_boot_RcppFuzzyCocoWrapper, 0},
-    {"_rcpp_module_boot_RcppRandomGenerator", (DL_FUNC) &_rcpp_module_boot_RcppRandomGenerator, 0},
     {"_rcpp_module_boot_RcppFuzzySystem", (DL_FUNC) &_rcpp_module_boot_RcppFuzzySystem, 0},
     {NULL, NULL, 0}
 };

@@ -19,6 +19,7 @@ Imports:
   utils
 Suggests:
   jsonlite,
+  knitr,
   parsnip,
   progressr,
   rlang,

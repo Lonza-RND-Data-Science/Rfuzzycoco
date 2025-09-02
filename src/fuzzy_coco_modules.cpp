@@ -176,24 +176,4 @@ RCPP_MODULE(RcppFuzzyCocoWrapper){
   ;
 }
 
-// Expose the RandomGenerator class
-RCPP_MODULE(RcppRandomGenerator){
-  Rcpp::class_<RandomGenerator>("RandomGenerator")
-  .constructor<int>()
-  .method("random_int",  static_cast<int (RandomGenerator::*)(int, int)>(&RandomGenerator::random))
-  .method("randomReal",  static_cast<double (RandomGenerator::*)(double, double)>(&RandomGenerator::randomReal))
-  ;
-}
 
-
-
-
-
-// // Expose (some of) the FuzzyCoco class
-// RCPP_MODULE(RcppFuzzyCoco){
-//   Rcpp::class_<FuzzyCoco>("FuzzyCoco")
-//   .constructor<const DataFrame&, const DataFrame&, int, bool>()
-//   // .field("fitness", &CoevGeneration::fitness)
-//   // .method("GetName", &Student::GetName)
-//   ;
-// }

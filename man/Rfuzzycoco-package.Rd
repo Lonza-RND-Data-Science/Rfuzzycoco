@@ -11,12 +11,17 @@ Provides an R Interface to the FuzzyCoco C++ Library and extends it.
 \section{Features}{
 
 
-\code{Rfuzzycoco} provides the FuzzyCoCo algorithm.
-\itemize{
-\item FuzzyCoCo algorithm based on \emph{Fuzzy CoCo: a cooperative-coevolutionary approach to fuzzy modeling} from \href{https://orcid.org/0000-0002-2113-6498}{Carlos Andrés Peña-Reyes}
-}
+\code{Rfuzzycoco} provides the FuzzyCoCo algorithm, cf \emph{Fuzzy CoCo: a cooperative-coevolutionary approach to fuzzy modeling} from \href{https://orcid.org/0000-0002-2113-6498}{Carlos Andrés Peña-Reyes}
 }
 
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/Lonza-RND-Data-Science/Rfuzzycoco}
+  \item Report bugs at \url{https://github.com/Lonza-RND-Data-Science/Rfuzzycoco/issues}
+}
+
+}
 \author{
 \strong{Maintainer}: Karl Forner \email{karl.forner@gmail.com}
 
