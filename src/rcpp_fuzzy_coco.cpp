@@ -7,9 +7,8 @@
 #include <Rcpp.h>
 using namespace Rcpp;
 
-//' FuzzyCoco::eval()
-//' @return a data.frame
-//' @export
+// FuzzyCoco::eval()
+//@return a data.frame
 // [[Rcpp::export]]
 List rcpp_fuzzy_coco_eval(Rcpp::DataFrame df, List fuzzy_system_desc, List params, bool verbose = false) {
   logging::logger().activate(verbose);
@@ -27,9 +26,8 @@ List rcpp_fuzzy_coco_eval(Rcpp::DataFrame df, List fuzzy_system_desc, List param
   return Rcpp::wrap(res);
 }
 
-//' FuzzyCoco::loadAndPredict()
-//' @return a data.frame
-//' @export
+//FuzzyCoco::loadAndPredict()
+//@return a data.frame
 // [[Rcpp::export]]
 Rcpp::DataFrame rcpp_fuzzy_coco_predict(Rcpp::DataFrame df, List fuzzy_system_desc, bool verbose = false) {
   logging::logger().activate(verbose);
@@ -46,9 +44,8 @@ Rcpp::DataFrame rcpp_fuzzy_coco_predict(Rcpp::DataFrame df, List fuzzy_system_de
 }
 
 
-//' FuzzyCoco::searchBestFuzzySystem()
-//' @return a list
-//' @export
+// FuzzyCoco::searchBestFuzzySystem()
+//@return a list
 // [[Rcpp::export]]
 List rcpp_fuzzy_coco_searchBestFuzzySystem(Rcpp::DataFrame df, int nb_out_vars, List params, int seed = 123, bool verbose = false) {
   fuzzy_coco::DataFrame _df = as<fuzzy_coco::DataFrame>(df);
