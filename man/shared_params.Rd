@@ -10,6 +10,8 @@
 
 \item{formula}{the fuzzy coco model as a formula}
 
+\item{fuzzy_system_desc}{a fuzzy system description as a named list}
+
 \item{max_generations}{The maximum number of iterations of the algorithm.
 Each iteration produces a new generation of the rules and membership functions populations.}
 

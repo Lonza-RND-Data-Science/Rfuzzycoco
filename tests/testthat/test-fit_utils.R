@@ -9,7 +9,7 @@ test_that("fs_rules_to_df", {
 
   ### rules_desc_to_df
   rules_df <- fs_rules_to_df(fit$fuzzy_system)
- 
+
   expect_identical(rules_df, 
     data.frame(wt = c(2, 0), qsec = c(3, 1), hp = c(3, 1), row.names = c("rule 1", "default rule")) )
   
@@ -42,8 +42,6 @@ test_that("fs_rules_to_df", {
   expect_identical(used_df, data.frame(mpg = TRUE, wt = TRUE, qsec = TRUE, hp = TRUE))
 
   
-
-
   ### 
   pms$global_params$nb_rules <- 1
   pms$global_params$nb_max_var_per_rule <- 1

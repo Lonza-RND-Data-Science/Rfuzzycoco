@@ -7,6 +7,8 @@ REGRESSION <- "regression"
 #' 
 #' @return a *fuzzycoco_model*  object (named list)
 #' @export
+#' @examples
+#' model <- fuzzycoco("regression", params(nb_rules = 1, nb_max_var_per_rule = 3), seed = 123, verbose = TRUE)
 fuzzycoco <- function(mode = c("classification", "regression"), params, seed = sample.int(10^5, 1), verbose = FALSE) {
   mode <- match.arg(mode)
 

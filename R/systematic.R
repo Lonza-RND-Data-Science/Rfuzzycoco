@@ -1,5 +1,18 @@
 # systematic search and related tools
 
+#' systematic search
+#' 
+#' This is a R implementation of a systematic search, where the fuzzy set positions are determined
+#' by the distribution of the data (cf [compute_optimal_quantile_fuzzy_set_positions()] and the rules
+#' are systematically explored
+#' 
+#' @param fitter  a function metrics --> fitness value providing the objective/fitness function to optimize
+#'  TODO: describe the metrics
+#' @inheritParams shared_params
+#' 
+#' @return a list of the best results (all ties). Each result is also a named list(metric=,fs=) holding the 
+#'  corresponding metric value and the fuzzy system.
+#' @export
 fuzzy_coco_systematic_fit <- function(x, y, params, fitter) {
   invars <- names(x)
   outvars <- names(y)
@@ -156,6 +169,13 @@ compute_optimal_quantile_fuzzy_set_positions_vec <- function(x, nb_sets) {
   unname(y[c(-1, -length(y))])
 }
 
+#' compute the optimal fuzzy set positions based on the the distribution of the data
+#' 
+#' @param df        the data as a data frame
+#' @param nb_sets   the number of fuzzy sets
+#' 
+#' @return a list, named after the df column names, holding the vector of positions per variable
+#' @export
 compute_optimal_quantile_fuzzy_set_positions <- function(df, nb_sets) {
   lapply(df, compute_optimal_quantile_fuzzy_set_positions_vec, nb_sets)
 }

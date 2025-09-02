@@ -28,6 +28,14 @@ complete_params_with_defaults <- function(lst) {
 #' 
 #' @return a nested named list
 #' @export
+#' @examples 
+#' pms <- params(
+#'  nb_rules = 2, nb_max_var_per_rule = 3, rules.pop_size = 20, mfs.pop_size = 20, 
+#'  ivars.nb_sets = 3, ivars.nb_bits_vars = 3,  ivars.nb_bits_sets = 2, ivars.nb_bits_pos = 8, 
+#'  ovars.nb_sets = 3, ovars.nb_bits_vars = 1, ovars.nb_bits_sets = 2, ovars.nb_bits_pos = 8, 
+#'  metricsw.sensitivity = 0, metricsw.specificity = 0, metricsw.rmse = 1,
+#'  output_vars_defuzz_thresholds = list(3, 17)
+#')
 params <- function(nb_rules, nb_max_var_per_rule, 
   max_generations = 100,
   max_fitness = 1,
@@ -45,13 +53,13 @@ params <- function(nb_rules, nb_max_var_per_rule,
   ovars.nb_bits_sets = NA_integer_,
   ovars.nb_bits_pos = NA_integer_,
 
-  rules.pop_size = NA_integer_,
+  rules.pop_size = 100,
   rules.elite_size = 5,
   rules.cx_prob = 0.5,
   rules.mut_flip_genome = 0.5,
   rules.mut_flip_bit = 0.025,
 
-  mfs.pop_size = NA_integer_,
+  mfs.pop_size = 100,
   mfs.elite_size = 5,
   mfs.cx_prob = 0.5,
   mfs.mut_flip_genome = 0.5,

@@ -1,0 +1,86 @@
+---
+title: "Getting started"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Getting started}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+
+```{r setup}
+library(Rfuzzycoco)
+options(width = 200)
+```
+
+
+
+# data and parameters
+
+We will use the `mtcars` dataset, three input variables and one output variable.
+
+```{r preprocess}
+x <- mtcars[c("mpg", "hp", "wt")]
+y <- mtcars["qsec"]
+
+
+pms <- params(
+  nb_rules = 2, nb_max_var_per_rule = 3, rules.pop_size = 100, mfs.pop_size = 100, 
+  ivars.nb_sets = 3, ivars.nb_bits_vars = 3,  ivars.nb_bits_sets = 2, ivars.nb_bits_pos = 8, 
+  ovars.nb_sets = 3, ovars.nb_bits_vars = 1, ovars.nb_bits_sets = 2, ovars.nb_bits_pos = 8, 
+  metricsw.sensitivity = 0, metricsw.specificity = 0, metricsw.rmse = 1,
+  output_vars_defuzz_thresholds = 17
+)
+str(pms)
+```
+
+
+# using the base R S3 interface
+
+## model
+
+Let's create a regression model, with our params, and set a `seed` for reproducibility.
+
+```{r model}
+model <- fuzzycoco("regression", pms, seed = 123)
+class(model)
+```
+
+## fitting the model
+
+### fit_xy(): using dataframes
+
+```{r fit_xy}
+# N.B: progress = FALSE because we are in a vignette
+fit <- fit_xy(model, x, y, progress = FALSE)
+
+# we get a "fuzzycoco_fit" object
+class(fit)
+
+# that has many components
+names(fit)
+
+# among which: the model fitting information 
+str(fit$fit)
+
+# the (best) fitted Fuzzy System 
+str(fit$fuzzy_system)
+```
+
+### fit(): using a formula
+
+There is a also a formula-based interface:
+
+```{r fit}
+df <- cbind(x, y)
+# N.B: we use a different engine, and also overwrite `max_generations` from the model parameters
+fit <- fit(model, qsec ~ ., df, engine = "rcpp", seed = 456, max_generations = 20)
+
+str(fit$fit)
+```
+
