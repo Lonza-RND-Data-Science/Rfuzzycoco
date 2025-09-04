@@ -30,7 +30,7 @@ manual: rox
 	R CMD Rd2pdf -o $(PKG).pdf .
 
 clean:
-	rm -rf .checks* .Rd2* src/*.o src/*.so src/*.a
+	rm -rf .checks* .Rd2* src/*.o src/*.so src/*.a src/fuzzycoco/src/*.o
 	
 pkgdown: rox
 	Rscript --no-save -e 'pkgdown::build_site()'

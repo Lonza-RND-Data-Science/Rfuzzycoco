@@ -5,33 +5,33 @@
 # where to find the Fuzzy Coco C++ source files
 FUZZYCOCO_SRC=fuzzycoco/src
 
-# N.B: -UNDEBUG for disabling assert
-PKG_CPPFLAGS=-I. -I$(FUZZYCOCO_SRC)
+PKG_CPPFLAGS=-I$(FUZZYCOCO_SRC)
+# PKG_CPPFLAGS=-I. -I$(FUZZYCOCO_SRC)
 
-# this is our lib
-PKG_LIBS= libfuzzycoco.a
+# R CMD check does not like GNU make extensions such as $(wildcard). So I had to hard-code the SOURCES grrr
+# SOURCES = $(wildcard *.cpp) $(wildcard $(FUZZYCOCO_SRC)/*.cpp)
+SOURCES=RcppExports.cpp df_io.cpp fuzzy_coco_modules.cpp list_io.cpp rcpp_fuzzy_coco.cpp fuzzycoco/src/bitarray.cpp fuzzycoco/src/coevolution_engine.cpp fuzzycoco/src/coevolution_fitness.cpp fuzzycoco/src/crossover_method.cpp fuzzycoco/src/dataframe.cpp fuzzycoco/src/evolution_engine.cpp fuzzycoco/src/file_utils.cpp fuzzycoco/src/fuzzy_coco.cpp fuzzycoco/src/fuzzy_coco_codec.cpp fuzzycoco/src/fuzzy_coco_engine.cpp fuzzycoco/src/fuzzy_coco_fitness.cpp fuzzycoco/src/fuzzy_coco_params.cpp fuzzycoco/src/fuzzy_default_rule.cpp fuzzycoco/src/fuzzy_rule.cpp fuzzycoco/src/fuzzy_system.cpp fuzzycoco/src/fuzzy_system_fitness.cpp fuzzycoco/src/fuzzy_system_metrics.cpp fuzzycoco/src/fuzzy_system_metrics_computer.cpp fuzzycoco/src/fuzzy_variable.cpp fuzzycoco/src/fuzzy_variables_db.cpp fuzzycoco/src/genome_codec.cpp fuzzycoco/src/mutation_method.cpp fuzzycoco/src/named_list.cpp fuzzycoco/src/selection_method.cpp fuzzycoco/src/string_utils.cpp
 
-all: $(SHLIB)
-	echo "====================== all ================"
+# OBJECTS = $(patsubst %.cpp,%.o,$(SOURCES))
+OBJECTS = $(SOURCES:.cpp=.o)
+
+MY_CXXFLAGS = $(filter-out -g -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer,$(ALL_CXXFLAGS))
+
+%.o: %.cpp
+	$(CXX) $(ALL_CPPFLAGS) $(MY_CXXFLAGS)  -c $< -o $@
+
+all: debug $(SHLIB)
+
+$(SHLIB): $(OBJECTS)
+
+debug:
+	@echo OBJECTS=$(OBJECTS)
+	@echo SOURCES=$(SOURCES)
+	@echo MY_CXXFLAGS=$(MY_CXXFLAGS)
+	@echo ALL_CXXFLAGS=$(ALL_CXXFLAGS)
 
 # # Provide recipe to remove all objects
 clean:
-	rm -f $(OBJECTS) libfuzzycoco.a Rfuzzycoco.so*
-	rm -rf $(OBJS)
+	rm -f $(OBJECTS)  Rfuzzycoco.so*
 
-$(SHLIB): libfuzzycoco.a
-
-
-# where we compile the fuzzycoco sources
-OBJS=$(PWD)/objs
-libfuzzycoco.a:
-	echo PKG_CXXFLAGS=$(PKG_CXXFLAGS)
-	echo PKG_CPPFLAGS=$(PKG_CPPFLAGS) 
-	echo CPPFLAGS=$(CPPFLAGS) 
-	echo CFLAGS=$(CFLAGS) 
-	echo CXXFLAGS=$(CXXFLAGS)
-	mkdir -p $(OBJS)
-	(cd $(FUZZYCOCO_SRC); for source in *.cpp; do echo "compiling $$source..."; $(CXX) -c  $(PKG_CPPFLAGS) $(ALL_CXXFLAGS) $$source -I. -o $(OBJS)/$$source.o; done);
-	$(CXX) -r objs/*.o -o $@
-# 	strip -s $@
 
