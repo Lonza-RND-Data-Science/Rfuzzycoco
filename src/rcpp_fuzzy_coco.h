@@ -12,8 +12,8 @@
 namespace Rcpp {
   namespace traits{
       // Support for as<T>
-      class Exporter< fuzzy_coco::DataFrame >;
-      class Exporter< fuzzy_coco::NamedList >;
+      template <>  class Exporter< fuzzy_coco::DataFrame >;
+       template <> class Exporter< fuzzy_coco::NamedList >;
   }
 }
 
@@ -168,7 +168,7 @@ namespace Rcpp {
                  throw std::invalid_argument("NULL not supported yet for NamedList");
                 break;
               default:
-                throw std::invalid_argument("Unsupported type at index" + i);
+                throw std::invalid_argument("Unsupported type at index" + std::to_string(i));
             }
 
           }
