@@ -143,15 +143,15 @@ private:
 
 
 
-// Expose (some of) the CoevGeneration struct
-RCPP_MODULE(RcppCoevGeneration){
-  Rcpp::class_<CoevGeneration>("CoevGeneration")
-  // .constructor<std::string, int, bool>()
-  .field("fitness", &CoevGeneration::fitness)
-  .field("generation_number", &CoevGeneration::generation_number)
-  // .method("GetName", &Student::GetName)
-  ;
-}
+// // Expose (some of) the CoevGeneration struct
+// RCPP_MODULE(RcppCoevGeneration){
+//   Rcpp::class_<CoevGeneration>("CoevGeneration")
+//   // .constructor<std::string, int, bool>()
+//   .field("fitness", &CoevGeneration::fitness)
+//   .field("generation_number", &CoevGeneration::generation_number)
+//   // .method("GetName", &Student::GetName)
+//   ;
+// }
 
 // Expose the FuzzyCocoWrapper class
 RCPP_MODULE(RcppFuzzyCocoWrapper){

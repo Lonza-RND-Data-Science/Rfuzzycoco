@@ -9,27 +9,31 @@ Rfuzzycoco provides the FuzzyCoCo algorithm by wrapping the [fuzzycoco](https://
 ## License
 
 This fuzzycoco software is licensed under the GNU Affero General Public License v3.0 (AGPL-3.0).  
-See the [LICENSE](./LICENSE) file for details.
 
 ## Installation
 
-You can install the development version of Rfuzzycoco like so:
+You can install the development version of Rfuzzycoco from github.
+Because the Rfuzzycoco uses a git submodule, the usual easy ways to install
+packages, like `remotes::install_github()` and `pak::pak()` do not work.
 
-``` r
-# FILL THIS IN! HOW CAN PEOPLE INSTALL YOUR DEV PACKAGE?
+The easiest way is thus to clone the github repository, fetch the submodule and install the local package source from 
+the terminal:
+
+
+```bash
+git clone https://github.com/Lonza-RND-Data-Science/Rfuzzycoco.git
+cd Rfuzzycoco/
+git submodule update --init
+
+# install devtools from CRAN if needed
+R -e "install.packages('devtools')"
+
+# install the local package
+R -e "devtools::install('.')"
 ```
 
 ## Local setup
 
 - clone the repo
 - get the submodule: `git submodule update --init`
-
-## Example
-
-This is a basic example which shows you how to solve a common problem:
-
-``` r
-library(Rfuzzycoco)
-## basic example code
-```
 

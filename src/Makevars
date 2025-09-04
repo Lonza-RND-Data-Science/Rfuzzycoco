@@ -5,9 +5,8 @@
 # where to find the Fuzzy Coco C++ source files
 FUZZYCOCO_SRC=fuzzycoco/src
 
+# N.B: -UNDEBUG for disabling assert
 PKG_CPPFLAGS=-I. -I$(FUZZYCOCO_SRC)
-# PKG_CXXFLAGS = -g -O0
-# PKG_CXXFLAGS:=-g -O2
 
 # this is our lib
 PKG_LIBS= libfuzzycoco.a
@@ -20,14 +19,19 @@ clean:
 	rm -f $(OBJECTS) libfuzzycoco.a Rfuzzycoco.so*
 	rm -rf $(OBJS)
 
-
 $(SHLIB): libfuzzycoco.a
-
 
 
 # where we compile the fuzzycoco sources
 OBJS=$(PWD)/objs
 libfuzzycoco.a:
+	echo PKG_CXXFLAGS=$(PKG_CXXFLAGS)
+	echo PKG_CPPFLAGS=$(PKG_CPPFLAGS) 
+	echo CPPFLAGS=$(CPPFLAGS) 
+	echo CFLAGS=$(CFLAGS) 
+	echo CXXFLAGS=$(CXXFLAGS)
 	mkdir -p $(OBJS)
-	(cd $(FUZZYCOCO_SRC); for source in *.cpp; do echo "compiling $$source..."; $(CXX) -c $(PKG_CXXFLAGS) $(PKG_CPPFLAGS) -fPIC $$source -I. -o $(OBJS)/$$source.o; done);
-	$(CXX) -r objs/*.o -o libfuzzycoco.a
+	(cd $(FUZZYCOCO_SRC); for source in *.cpp; do echo "compiling $$source..."; $(CXX) -c  $(PKG_CPPFLAGS) $(ALL_CXXFLAGS) $$source -I. -o $(OBJS)/$$source.o; done);
+	$(CXX) -r objs/*.o -o $@
+# 	strip -s $@
+

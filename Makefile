@@ -3,17 +3,23 @@ PKG=Rfuzzycoco
 rox:
 	Rscript --no-save -e 'devtools::document()'
 
-compile_attributes:
-	Rscript --no-save -e 'Rcpp::compileAttributes()'
-
 build: rox
 	Rscript --no-save -e 'devtools::build()'
+
+compile:
+	Rscript --no-save -e 'pkgbuild::compile_dll(debug = FALSE)'
 
 check: rox
 	_R_CHECK_SYSTEM_CLOCK_=0 Rscript --no-save -e 'devtools::check(".", check_dir = ".checks")'
 
+check/novignettes:
+	_R_CHECK_SYSTEM_CLOCK_=0 Rscript --no-save -e 'devtools::check(".", check_dir = ".checks", vignettes = FALSE)'
+
 run_examples: rox
 	Rscript --no-save -e 'devtools::run_examples(run_donttest = TRUE)'
+
+build_vignettes: rox
+	Rscript --no-save -e 'devtools::build_vignettes()'
 
 FILTER=
 test: rox
