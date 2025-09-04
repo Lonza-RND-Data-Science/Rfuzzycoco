@@ -30,5 +30,5 @@ an utility function to easily generate the commonly used \code{until} parameter,
 \examples{
 until <- stop_engine_on_first_of(max_generations = 100)
 until <- stop_engine_on_first_of(max_generations = 100, max_fitness = 0.8)
-until <- stop_engine_on_first_of(max_generations = 1000, max_fitness = 0.9, other_func = stop_engine_if_stalling(5))
+until <- stop_engine_on_first_of(max_fitness = 0.9, other_func = stop_engine_if_stalling(5))
 }

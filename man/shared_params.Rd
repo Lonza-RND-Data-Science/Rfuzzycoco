@@ -24,6 +24,8 @@ reaches that threshold.}
 
 \item{params}{fuzzy coco parameters, as a recursive named list, cf \code{\link[=params]{params()}}}
 
+\item{progress}{whether to display the computation progress (using progressr, if available)}
+
 \item{seed}{the RNG seed to use (to fit the model)}
 
 \item{until}{function that takes an \code{engine} and returns TRUE if and only if the evolution must stop.

@@ -1,5 +1,5 @@
 #' @importFrom methods new
-#' @importFrom stats  median model.frame na.omit
+#' @importFrom stats  median model.frame na.omit predict
 #' @importFrom utils  head tail
 NULL
 

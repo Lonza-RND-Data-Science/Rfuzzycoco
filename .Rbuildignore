@@ -5,6 +5,7 @@
 
 ^Makefile
 dev.R
+debug.R
 TODO.md
 
 ^_pkgdown\.yml$
@@ -16,3 +17,4 @@ TODO.md
 ^Meta$
 ^cran-comments\.md$
 ^src/fuzzycoco/tests
+^src/fuzzycoco/Release

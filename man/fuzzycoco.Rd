@@ -27,5 +27,5 @@ a \emph{fuzzycoco_model}  object (named list)
 creates a model for the Fuzzy Coco algorithm
 }
 \examples{
-model <- fuzzycoco("regression", params(nb_rules = 1, nb_max_var_per_rule = 3), seed = 123, verbose = TRUE)
+model <- fuzzycoco("regression", params(nb_rules = 1, nb_max_var_per_rule = 3), seed = 123)
 }

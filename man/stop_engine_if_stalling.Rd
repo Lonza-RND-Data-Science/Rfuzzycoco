@@ -19,5 +19,5 @@ a function engine --> logical that stops (i.e/ returns TRUE) if the convergence 
 an utility function to easily generate a stop function that stops when the convergence is stalling
 }
 \examples{
-until <- stop_engine_on_first_of(max_generations = 1000, max_fitness = 0.9, other_func = stop_engine_if_stalling(5))
+until <- stop_engine_on_first_of(max_generations = 1000, other_func = stop_engine_if_stalling(5))
 }

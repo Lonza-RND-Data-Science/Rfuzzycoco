@@ -30,7 +30,7 @@ RUN install_r_pkgs < /tmp/r_deps.txt
 RUN apt update && apt install -y r-cran-rcpp  r-cran-rcppprogress r-cran-srcpkgs r-cran-languageserver r-cran-httpgd
 
 # pkgdown deps;
-RUN apt update && apt install -y pandoc
+RUN apt update && apt install -y pandoc qpdf
 
 ############# user stuff ###########
 RUN apt update && apt install -y bash-completion make

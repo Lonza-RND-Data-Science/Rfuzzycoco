@@ -39,6 +39,7 @@ reaches that threshold.}
   Arguments passed on to \code{\link[=fuzzycoco_fit_df_hybrid]{fuzzycoco_fit_df_hybrid}}
   \describe{
     \item{\code{model}}{a Fuzzy Coco model as a \code{fuzzy_coco} object}
+    \item{\code{progress}}{whether to display the computation progress (using progressr, if available)}
     \item{\code{until}}{function that takes an \code{engine} and returns TRUE if and only if the evolution must stop.
 It is a way for the user to customize the stop conditions of the algorithm.}
   }}

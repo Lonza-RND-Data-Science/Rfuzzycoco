@@ -11,7 +11,8 @@ fuzzycoco_fit_df_hybrid(
   until = stop_engine_on_first_of(max_generations =
     model$params$global_params$max_generations, max_fitness =
     model$params$global_params$max_fitness),
-  verbose = model$verbose
+  verbose = model$verbose,
+  progress = TRUE
 )
 }
 \arguments{
@@ -25,6 +26,8 @@ fuzzycoco_fit_df_hybrid(
 It is a way for the user to customize the stop conditions of the algorithm.}
 
 \item{verbose}{whether to be verbose}
+
+\item{progress}{whether to display the computation progress (using progressr, if available)}
 }
 \value{
 a named list as a \code{fuzzy_coco} fit object
