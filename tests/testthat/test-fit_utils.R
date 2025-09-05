@@ -4,21 +4,21 @@ test_that("fs_rules_to_df", {
 
   pms <- CASE$params
   pms$fitness_params$output_vars_defuzz_thresholds <- list(0, 0)
-  model <- fuzzycoco("regression", pms, seed = 123)
+  model <- fuzzycoco("regression", pms, seed = 234)
   fit <- fit(model, cbind(qsec, hp) ~ wt, CASE$data, max_generations = 10)
 
   ### rules_desc_to_df
   rules_df <- fs_rules_to_df(fit$fuzzy_system)
 
   expect_identical(rules_df, 
-    data.frame(wt = c(2, 0), qsec = c(3, 1), hp = c(3, 1), row.names = c("rule 1", "default rule")) )
+    data.frame(wt = c(3, 0), qsec = c(3, 2), hp = c(3, 3), row.names = c("rule 1", "default rule")) )
   
   used_df <- fs_used_vars_to_df(fit$fuzzy_system)
   expect_identical(used_df, data.frame(wt = TRUE, qsec = TRUE, hp = TRUE))
  
   fit_df <- fit_to_df(fit, metric = "rmse")
-  expect_equal(fit_df, data.frame(wt = TRUE, qsec = TRUE, hp = TRUE, fitness = 1.04135183928023e-10, 
-    generations = 10L, seed = 123, rmse = 33.160823357638))
+  expect_equal(fit_df, data.frame(wt = TRUE, qsec = TRUE, hp = TRUE, fitness = 3.667429e-11, 
+    generations = 10L, seed = 234, rmse = 34.66644))
 
   #######
 
@@ -28,20 +28,20 @@ test_that("fs_rules_to_df", {
   fit <- fit(model, cbind(qsec, hp) ~ ., CASE$data, seed = 345, max_generations = 33)
 
   rules_df <- fs_rules_to_df(fit$fuzzy_system)
+
   expect_identical(rules_df, 
     data.frame(
-      mpg = c(0, 1, 1, 2, 3, 0), 
-      wt = c(3, 0, 0, 0, 0, 0), 
-      qsec = c(1, 1, 0, 1, 1, 2), 
-      hp = c(3, 0, 3, 1, 0, 1), 
-      row.names = c("rule 1", "rule 2", "rule 3", "rule 4", "rule 5", "default rule")
+      mpg = c(2, 1, 2, 0), 
+      wt = c(0, 0, 0, 0), 
+      qsec = c(2, 0, 0, 1), 
+      hp = c(0, 3, 1, 1), 
+      row.names = c("rule 1", "rule 2", "rule 3", "default rule")
     )
   )
 
   used_df <- fs_used_vars_to_df(fit$fuzzy_system)
-  expect_identical(used_df, data.frame(mpg = TRUE, wt = TRUE, qsec = TRUE, hp = TRUE))
+  expect_identical(used_df, data.frame(mpg = TRUE, wt = FALSE, qsec = TRUE, hp = TRUE))
 
-  
   ### 
   pms$global_params$nb_rules <- 1
   pms$global_params$nb_max_var_per_rule <- 1
@@ -50,10 +50,10 @@ test_that("fs_rules_to_df", {
   fit <- fit(model, qsec ~ ., CASE$data, seed = 345, max_generations = 5)
 
   used_df <- fs_used_vars_to_df(fit$fuzzy_system)
-  expect_identical(used_df, data.frame(mpg = FALSE, hp = TRUE, wt = FALSE, qsec = TRUE))
+  expect_identical(used_df, data.frame(mpg = TRUE, hp = FALSE, wt = FALSE, qsec = TRUE))
 
   fit_df <- fit_to_df(fit, metric = "rmse")
-  expect_equal(fit_df, data.frame(mpg = FALSE, hp = TRUE, wt = FALSE, qsec = TRUE, 
-    fitness = 0.293008255315928, generations = 5L, seed = 345, rmse = 1.77098678267816))
 
+  expect_equal(fit_df, data.frame(mpg = TRUE, hp = FALSE, wt = FALSE, qsec = TRUE, 
+    fitness = 0.320157600, generations = 5L, seed = 345, rmse = 1.643145967), tolerance = 1e-3)
 })

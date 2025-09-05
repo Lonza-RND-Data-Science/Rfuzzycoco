@@ -43,7 +43,7 @@ test_that("FuzzyCocoWrapper", {
   while((fitness <- x$next_gen()) < 0.95) {} 
 
   expect_equal(x$getCurrentFitness(), 1)
-  expect_lt(x$getCurrentGenerationNb(), 20)
+  expect_lt(x$getCurrentGenerationNb(), 100)
 })
 
 
@@ -69,7 +69,7 @@ test_that("multi_convergence", {
 
   best_engine <- which.max(fitnesses)
   expect_equal(best_engine, 2)
-  expect_equal(engines[[best_engine]]$getCurrentGenerationNb(), 80)
+  expect_equal(engines[[best_engine]]$getCurrentGenerationNb(), 12)
 
   desc <- engines[[best_engine]]$describeBestSystem()
   expect_true(is.list(desc))

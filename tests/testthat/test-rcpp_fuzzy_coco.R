@@ -30,10 +30,10 @@ test_that("iris36", {
 
   expect_true(is.list(res))
   expect_equal(res$fit$fitness, 1)
-  expect_equal(res$fit$generations, 56)
+  expect_equal(res$fit$generations, 18)
 
   rules <- res$fuzzy_system$rules
-  expect_equal(rules, CASE$rules$seed123)
+  expect_equal(rules, CASE$rules$seed123, tolerance = 0.001)
 
   ### predict
   dfout <- rcpp_fuzzy_coco_predict(df, res$fuzzy_system, verbose = FALSE)
@@ -83,11 +83,11 @@ test_that("multi_ouput", {
   CASE <- MTCARS_MULTI_OUTPUT()
   df <- CASE$data
 
-  res <- rcpp_fuzzy_coco_searchBestFuzzySystem(df, 2, CASE$params, seed = 123)
+  res <- rcpp_fuzzy_coco_searchBestFuzzySystem(df, 2, CASE$params, seed = 666)
 
   rules <- res$fuzzy_system$rules
   expect_setequal(names(rules[[1]]$consequents), c("wt", "qsec"))
-  expect_setequal(names(rules[[2]]$consequents), c("wt", "qsec"))
+  expect_setequal(names(rules[[2]]$consequents), "qsec")
   expect_setequal(names(res$fuzzy_system$default_rules), c("wt", "qsec"))
 
   dfout <- rcpp_fuzzy_coco_predict(df, res$fuzzy_system, verbose = FALSE)

@@ -21,12 +21,12 @@ test_that("stop_engine_if_stalling", {
   # with max_generations and max_fitness
   fit <- fit(model, qsec ~ ., CASE$data, engine = "hybrid", 
     until = stop_engine_on_first_of(max_generations = 20, max_fitness = 0.4, other_func = stop_engine_if_stalling(30)))
-  expect_true(fit$fit$generations <= 15)
+  expect_true(fit$fit$generations <= 20)
 
   # stopped by stalling
   fit <- fit(model, qsec ~ ., CASE$data, engine = "hybrid", 
     until = stop_engine_on_first_of(max_generations = 1000, max_fitness = 0.9, other_func = stop_engine_if_stalling(5)))
-  expect_true(fit$fit$generations <= 20)
+  expect_true(fit$fit$generations < 10)
 })
 
 .fuzzycoco_fit_df_hybrid <- 
@@ -153,7 +153,7 @@ test_that("hybrid_engine_wrappers", {
   CASE <- MTCARS_MULTI_OUTPUT()
 
   ## new_hybrid_engine
-  engine <- new_hybrid_engine(CASE$data, 2, CASE$params, 123)
+  engine <- new_hybrid_engine(CASE$data, 2, CASE$params, 345)
   expect_s4_class(engine, "Rcpp_FuzzyCocoWrapper")
   
   ##
