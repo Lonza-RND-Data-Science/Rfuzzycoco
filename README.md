@@ -2,6 +2,10 @@
 # Rfuzzycoco
 
 <!-- badges: start -->
+
+[![R-CMD-check](https://github.com/Lonza-RND-Data-Science/Rfuzzycoco/actions/workflows/R-CMD-check.yaml/badge.svg?branch=main)](https://github.com/Lonza-RND-Data-Science/Rfuzzycoco/actions/workflows/R-CMD-check.yaml)
+
+[![codecov](https://codecov.io/gh/Lonza-RND-Data-Science/Rfuzzycoco/graph/badge.svg?token=DNSmWrcvFd)](https://codecov.io/gh/Lonza-RND-Data-Science/Rfuzzycoco)
 <!-- badges: end -->
 
 Rfuzzycoco provides the FuzzyCoCo algorithm by wrapping the [fuzzycoco](https://github.com/Lonza-RND-Data-Science/fuzzycoco) C++ library, and extending its possibilities.
