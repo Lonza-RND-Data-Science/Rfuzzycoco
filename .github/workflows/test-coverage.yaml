@@ -29,6 +29,7 @@ jobs:
       - name: Checkout submodules
         run: git submodule update --init
 
+      # N.B: it uses the Lonza-RND-Data-Science org secret CODECOV_TOKEN
       - name: Test coverage
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
@@ -36,7 +37,9 @@ jobs:
           covr::codecov(
             quiet = FALSE,
             clean = FALSE,
-            install_path = file.path(normalizePath(Sys.getenv("RUNNER_TEMP"), winslash = "/"), "package")
+            install_path = file.path(normalizePath(Sys.getenv("RUNNER_TEMP"), winslash = "/"), "package"),
+            type = "tests",
+            combine_types = "r"
           )
         shell: Rscript {0}
 
