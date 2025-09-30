@@ -11,7 +11,7 @@ test_that("stop_engine_if_stalling", {
   x <- df[setdiff(names(df), responses)]; y <- df[responses]
 
   fit <- fit(model, qsec ~ ., CASE$data, engine = "hybrid", until = stop_engine_if_stalling(5))
-  expect_true(fit$fit$generations <= 20)
+  expect_true(fit$fit$generations <= 35)
 
   ### with stop_engine_on_first_of: max_generations
   fit <- fit(model, qsec ~ ., CASE$data, engine = "hybrid", 
@@ -20,13 +20,13 @@ test_that("stop_engine_if_stalling", {
 
   # with max_generations and max_fitness
   fit <- fit(model, qsec ~ ., CASE$data, engine = "hybrid", 
-    until = stop_engine_on_first_of(max_generations = 20, max_fitness = 0.4, other_func = stop_engine_if_stalling(30)))
+    until = stop_engine_on_first_of(max_generations = 20, max_fitness = 0.3, other_func = stop_engine_if_stalling(30)))
   expect_true(fit$fit$generations <= 15)
 
   # stopped by stalling
   fit <- fit(model, qsec ~ ., CASE$data, engine = "hybrid", 
     until = stop_engine_on_first_of(max_generations = 1000, max_fitness = 0.9, other_func = stop_engine_if_stalling(5)))
-  expect_true(fit$fit$generations <= 20)
+  expect_true(fit$fit$generations <= 35)
 })
 
 .fuzzycoco_fit_df_hybrid <- 

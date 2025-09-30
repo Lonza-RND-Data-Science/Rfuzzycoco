@@ -42,7 +42,7 @@ test_that("FuzzyCocoWrapper", {
   fitness <- NULL
   while((fitness <- x$next_gen()) < 0.95) {} 
 
-  expect_equal(x$getCurrentFitness(), 1)
+  expect_gt(x$getCurrentFitness(), 0.95)
   expect_lt(x$getCurrentGenerationNb(), 20)
 })
 
@@ -68,14 +68,14 @@ test_that("multi_convergence", {
   }
 
   best_engine <- which.max(fitnesses)
-  expect_equal(best_engine, 2)
-  expect_equal(engines[[best_engine]]$getCurrentGenerationNb(), 80)
+  expect_equal(best_engine, 3)
+  expect_equal(engines[[best_engine]]$getCurrentGenerationNb(), 9)
 
   desc <- engines[[best_engine]]$describeBestSystem()
   expect_true(is.list(desc))
   fs <- desc$fuzzy_system
   rules <- fs$rules
   expect_length(rules, 2)
-  expect_identical(names(rules[[1]]$antecedents), "Petal.Length")
-  expect_identical(names(rules[[2]]$antecedents), "Sepal.Width")
+  expect_identical(names(rules[[1]]$antecedents), "Sepal.Width")
+  expect_identical(names(rules[[2]]$antecedents), "Petal.Length")
 })

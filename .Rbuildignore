@@ -4,6 +4,7 @@
 ^.*\.o$
 
 ^Makefile
+^.covrignore
 dev.R
 debug.R
 TODO.md
