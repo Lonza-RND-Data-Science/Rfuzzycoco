@@ -14,7 +14,7 @@ IRIS36 <- function() {
 
   rules <- list(seed123 = 
     list(rule1 = list(
-      antecedents = list(Petal.Length = list(Petal.Length.1 = 1.944477)), 
+      antecedents = list(Petal.Width = list(Petal.Width.1 = 0.817888563049853)), 
       consequents = list(OUT = list(OUT.1 = 0)))
     )
   )
