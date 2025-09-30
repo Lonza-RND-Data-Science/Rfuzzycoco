@@ -1,5 +1,6 @@
 
 broom.mixed
+covr
 dotwhisker
 nycflights13
 skimr
