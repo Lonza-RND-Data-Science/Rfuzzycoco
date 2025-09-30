@@ -26,6 +26,9 @@ jobs:
           extra-packages: any::covr
           needs: coverage
 
+      - name: Checkout submodules
+        run: git submodule update --init
+
       - name: Test coverage
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
