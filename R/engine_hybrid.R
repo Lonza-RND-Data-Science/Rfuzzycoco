@@ -126,7 +126,6 @@ stop_engine_on_first_of <- function(max_generations = NULL, max_fitness = NULL, 
 #' 
 #' @param nb_iterations    number of iterations of the stalling: stops if the fitness has not increased during that
 #'  number of iterations.
-#' @inheritParams shared_params
 #' @return a function engine --> logical that stops (i.e/ returns TRUE) if the convergence is stalling
 #' @export
 #' @examples

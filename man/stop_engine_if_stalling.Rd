@@ -4,13 +4,11 @@
 \alias{stop_engine_if_stalling}
 \title{an utility function to easily generate a stop function that stops when the convergence is stalling}
 \usage{
-stop_engine_if_stalling(nb_iterations, verbose = FALSE)
+stop_engine_if_stalling(nb_iterations)
 }
 \arguments{
 \item{nb_iterations}{number of iterations of the stalling: stops if the fitness has not increased during that
 number of iterations.}
-
-\item{verbose}{whether to be verbose}
 }
 \value{
 a function engine --> logical that stops (i.e/ returns TRUE) if the convergence is stalling
