@@ -89,12 +89,6 @@ public:
     return getFuzzyCoco().describe(getCurrentGenerationNb());
   }
 
-  void print() {
-    Rcerr << _dfin << _dfout;
-    if (_params_ptr) Rcerr << *_params_ptr;
-    if (_coco_ptr) Rcerr << *_coco_ptr;
-  }
-
 protected:
 
   NamedList describeMFs(const Genomes& mfs_genomes) {
@@ -142,37 +136,20 @@ private:
 };
 
 
-
-// // Expose (some of) the CoevGeneration struct
-// RCPP_MODULE(RcppCoevGeneration){
-//   Rcpp::class_<CoevGeneration>("CoevGeneration")
-//   // .constructor<std::string, int, bool>()
-//   .field("fitness", &CoevGeneration::fitness)
-//   .field("generation_number", &CoevGeneration::generation_number)
-//   // .method("GetName", &Student::GetName)
-//   ;
-// }
-
 // Expose the FuzzyCocoWrapper class
 RCPP_MODULE(RcppFuzzyCocoWrapper){
   Rcpp::class_<FuzzyCocoWrapper>("FuzzyCocoWrapper")
-    // .constructor<bool>()
+
     .constructor<Rcpp::DataFrame, int, List, int, bool>()
     .method("start", &FuzzyCocoWrapper::start)
     .method("next_gen", &FuzzyCocoWrapper::next_gen)
-    // .method("getCurrentGeneration", &FuzzyCocoWrapper::getCurrentGeneration)
+
     .method("getCurrentFitness", &FuzzyCocoWrapper::getCurrentFitness)
     .method("getCurrentGenerationNb", &FuzzyCocoWrapper::getCurrentGenerationNb)
-    // .method("describeCurrentGenerationRules", &FuzzyCocoWrapper::describeCurrentGenerationRules)
-    // .method("describeCurrentGenerationMFs", &FuzzyCocoWrapper::describeCurrentGenerationMFs)
+
     .method("describeCurrentGeneration", &FuzzyCocoWrapper::describeCurrentGeneration)
     .method("describeBestSystem", &FuzzyCocoWrapper::describeBestSystem)
 
-    // .method("set_df", &FuzzyCocoWrapper::set_df)
-    // .method("set_params", &FuzzyCocoWrapper::set_params)
-    // .method("init_coco", &FuzzyCocoWrapper::init_coco)
-    .method("print", &FuzzyCocoWrapper::print)
-    // .method("set_df", static_cast<void (FuzzyCocoWrapper::*)(Rcpp::DataFrame)>(&FuzzyCocoWrapper::set_df))
   ;
 }
 

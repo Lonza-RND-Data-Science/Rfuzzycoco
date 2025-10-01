@@ -36,12 +36,17 @@ pkgdown: rox
 	Rscript --no-save -e 'pkgdown::build_site()'
 
 zero-coverage:
-	Rscript -e 'library(covr); zero_coverage(package_coverage())'
+	Rscript -e 'library(covr); suppressWarnings(zero_coverage(package_coverage()))'
 
 covr:
-	Rscript -e 'library(covr); print(package_coverage())'
+	Rscript -e 'library(covr); suppressWarnings(print(package_coverage()))'
 
+covr/fast:
+	Rscript -e 'library(covr); suppressWarnings(print(package_coverage(type = "tests", clean=FALSE, pre_clean=FALSE)))'
 
 COVR_REPORT=.tmp/cov.html
 report_covr:
-	Rscript -e 'library(covr); print(report(package_coverage(), "$(COVR_REPORT)"))'
+	Rscript -e 'library(covr); suppressWarnings(print(report(package_coverage(), "$(COVR_REPORT)")))'
+
+report_covr/fast:
+	Rscript -e 'library(covr); suppressWarnings(print(report(package_coverage(type = "tests", clean=FALSE, pre_clean=FALSE), "$(COVR_REPORT)")))'

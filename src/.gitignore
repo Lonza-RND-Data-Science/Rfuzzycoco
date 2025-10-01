@@ -1,4 +1,5 @@
 *.o
+*.gcda
 *.so
 *.a
 objs/

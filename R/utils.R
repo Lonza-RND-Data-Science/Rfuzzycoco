@@ -19,7 +19,9 @@ enhanced_sprintf <- function(fmt, ..., collapse = ',') {
     if (length(x) > 1) {
       paste0(x, collapse = collapse) 
     } else {
-      if (length(x) == 0) '' else x
+      if (length(x) == 0) 
+        '' 
+      else x
     }
   }
   fixed_dots <- lapply(dots, .collapse_args)
@@ -29,7 +31,7 @@ enhanced_sprintf <- function(fmt, ..., collapse = ',') {
 
 # for building error messages, we must not crash on bad input
 safe_enhanced_sprintf <- function(fmt, ...) {
-  msg <- try(enhanced_sprintf(fmt, ...))
+  msg <- try(enhanced_sprintf(fmt, ...), silent = TRUE)
   if (is_error(msg)) {
     msg <- paste0('could not build error message: "', extract_error_message(msg), '"')
   }
@@ -48,15 +50,10 @@ is_condition_true <- function(cond) {
   as.logical(cond)
 }
 
-is_string <- function(x) length(x) == 1 && is.character(x)
-is_nz_string <- function(x)  length(x) == 1 && is.character(x) && nzchar(x)
 
 is_error <- function(x) inherits(x, "try-error")
 
 stop_unless <- function(cond, format, ...) {
-	if (missing(format)) {
-		stop("Argument 'format' is missing in die_unless()")
-	}
   if (!is_condition_true(cond)) {
     msg <- safe_enhanced_sprintf(format, ...)
     # N.B: we do not want the call to be part of the message
@@ -70,36 +67,4 @@ stop_if <- function(cond, ...) {
   stop_unless(!cond, ...)
 }
 
-mute <- function(..., messages = TRUE, warnings = TRUE, output = TRUE) {
-  msg <- if (messages) suppressMessages else identity
-  warn <- if (warnings) suppressWarnings else identity
-  out <- identity
-  if (output) {
-    out <- function(...) {
-        utils::capture.output(msg <- utils::capture.output(...), type = 'message')
-        msg
-    }
-  } 
 
-  invisible(out(warn(msg(...))))
-}
-
-
-
-get_elements <- function(lst, idx) {
-  lapply(lst, getElement, idx)
-}
-
-
-
-fast_unlist <- function(x, recursive = FALSE, use.names = FALSE) {
-  unlist(x, recursive, use.names)
-}
-
-
-# subset a list with a s3 class without losing the class attribute
-subset_s3_list <- function(lst, idx) {
-  subset_lst <- lst[idx]
-  class(subset_lst) <- class(lst)
-  subset_lst
-}

@@ -39,9 +39,6 @@ test_that("lst_convert", {
   expect_identical(lst_convert(list(na_int = NA_integer_)), list(na_int = NA_integer_))
   expect_identical(lst_convert(list(na_real = NA_real_)), list(na_real = NA_real_))
 
-  # ### regression
- 
-  # lst <- params(3, 2, rules.pop_size = 10, mfs.pop_size = 20)
-  # lst2 <- lst_convert(lst)
-
+  #### unsupported types
+  expect_error(lst_convert(list(x = raw())), "Unsupported type")
 })

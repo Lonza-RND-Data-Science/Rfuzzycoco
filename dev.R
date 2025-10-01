@@ -25,5 +25,6 @@ test(filter = "rcpp_list_convert")
 test(filter = "rcpp_modules")
 test(filter = "samples")
 test(filter = "systematic")
+test(filter = "^utils")
 
 check("Rfuzzycoco")

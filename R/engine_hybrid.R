@@ -131,7 +131,7 @@ stop_engine_on_first_of <- function(max_generations = NULL, max_fitness = NULL, 
 #' @export
 #' @examples
 #' until <- stop_engine_on_first_of(max_generations = 1000, other_func = stop_engine_if_stalling(5))
-stop_engine_if_stalling <- function(nb_iterations, verbose = FALSE) {
+stop_engine_if_stalling <- function(nb_iterations) {
   best_fitness <- -1
   best_nb <- -1
 
@@ -144,7 +144,7 @@ stop_engine_if_stalling <- function(nb_iterations, verbose = FALSE) {
       ### ! critical: we update the closure variable, from parent
       best_fitness <<- fitness
       best_nb <<- iterations
-      if (verbose) cat("best_fitness", best_fitness, "at iteration",  iterations, "\n")
+      # if (verbose) cat("best_fitness", best_fitness, "at iteration",  iterations, "\n")
 
     } else {
       if ( (iterations - best_nb) >= nb_iterations) return(TRUE)

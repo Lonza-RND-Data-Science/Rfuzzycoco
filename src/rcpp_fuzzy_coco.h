@@ -47,11 +47,13 @@ namespace Rcpp {
           rcpp_lst(i) = d;
         } else if (scalar.is_string()) {
           rcpp_lst(i) = scalar.get_string();
-        } else if (scalar.is_null()) {
-          rcpp_lst(i) = R_NilValue;
-        } else {
-          throw(Rcpp::exception("unknown scalar type: should not happen"));
-        }
+        } 
+        // this can't happen since there's is no way to add a null scalar to a NamedList
+        // else if (scalar.is_null()) {
+        //   rcpp_lst(i) = R_NilValue;
+        // } else {
+        //   throw(Rcpp::exception("unknown scalar type: should not happen"));
+        // }
       } else { // list
          rcpp_lst(i) = wrap_list(elt);
       }
@@ -100,11 +102,7 @@ namespace Rcpp {
       Rcpp::List _rcpp_lst;
 
     public:
-      Exporter(SEXP x) : _rcpp_lst(x)
-      {
-          // if (TYPEOF(x) != RTYPE)
-          //     throw std::invalid_argument("Wrong R type for mapped 1D array");
-      }
+      Exporter(SEXP x) : _rcpp_lst(x)  { }
       // convert a  Rcpp::List to a NamedList
       fuzzy_coco::NamedList get() {
           fuzzy_coco::NamedList lst;
@@ -167,8 +165,9 @@ namespace Rcpp {
               case NILSXP:
                  throw std::invalid_argument("NULL not supported yet for NamedList");
                 break;
+
               default:
-                throw std::invalid_argument("Unsupported type at index" + std::to_string(i));
+                throw std::invalid_argument("Unsupported type at index " + std::to_string(i));
             }
 
           }
