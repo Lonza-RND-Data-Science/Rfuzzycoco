@@ -1,2 +1,4 @@
 ignore:
   - "src/fuzzycoco" # ignore fuzzycoco lib files
+  - "R/zzz.R"
+

@@ -15,7 +15,7 @@ rmse <- function(y, y0) sqrt(mse(y, y0))
 
 mean_error <- function(y, y0) (y + y0) / 2
 rae <- function(y, y0) sum(abs( (y - y0) / mean_error(y, y0))) / length(y0)
-rrse <- function(y, y0) sqrt(sum( ( (y - y0) / mean_error(y, y0) )^2) / length(y0))
+# rrse <- function(y, y0) sqrt(sum( ( (y - y0) / mean_error(y, y0) )^2) / length(y0))
 
 classification_metrics <- function(y, y0) {
   TP <- sum(y0 > 0 & y > 0 )

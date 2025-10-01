@@ -27,8 +27,6 @@ process_classification_response <- function(vec, threshold = NULL) {
     solid_values <- na.omit(unique(vec))
     if (length(solid_values) > 2) { 
       return(bin_continuous_response_to_01(vec, threshold))
-      vec <- ifelse(vec < threshold, 0L, 1L)
-      return(vec)
     }
   }
 
