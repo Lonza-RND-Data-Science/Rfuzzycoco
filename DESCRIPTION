@@ -1,10 +1,14 @@
 Package: Rfuzzycoco
 Type: Package
-Title: Provides an R Interface to the FuzzyCoco C++ Library and extends it
+Title: Provides an R Interface to the FuzzyCoco C++ Library and Extends it
 Version: 0.1
 Date: 2025-09-02
 Authors@R: person("Karl", "Forner", role = c("aut", "cre"), email ="karl.forner@gmail.com")
-Description: Provides an R Interface to the FuzzyCoco C++ Library and extends it.
+Description: Provides and extends the Fuzzy Coco algorithm by wrapping the 'FuzzyCoco' C++ Library, 
+    cf <https://github.com/Lonza-RND-Data-Science/fuzzycoco>.
+    Fuzzy Coco constructs systems that predict the outcome of a human decision-making process while providing an 
+    understandable explanation of a possible reasoning leading to it. 
+    The constructed fuzzy systems are composed of rules and linguistic variables.
 URL: https://github.com/Lonza-RND-Data-Science/Rfuzzycoco
 BugReports: https://github.com/Lonza-RND-Data-Science/Rfuzzycoco/issues
 SystemRequirements: C++17
