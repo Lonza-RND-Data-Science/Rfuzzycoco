@@ -20,6 +20,34 @@ complete_params_with_defaults <- function(lst) {
   utils::modifyList(defaults, lst)
 }
 
+# resolve unset parameters (NA) with sane defaults for the given response data
+resolve_params <- function(params, y, is_regression) {
+  stop_unless(is.data.frame(y), "y must be a data.frame.")
+  # output_vars_defuzz_thresholds
+  param <- params$fitness_params$output_vars_defuzz_thresholds
+  if(length(param) == 1 && is.na(param)) {
+    if (is_regression) {
+      # for regression, we take the median of the response vars
+      params$fitness_params$output_vars_defuzz_thresholds <- lapply(y, median)
+    } else {
+      # N.B: for classification, we always use 0.5 by default
+      params$fitness_params$output_vars_defuzz_thresholds <- as.list(rep(0.5, length(y)))
+    }
+  }
+
+  params
+}
+
+# perform some checks on the parameters, mainly to avoid crashing in C++ code.
+check_params <- function(params, nb_out_vars) {
+  # output_vars_defuzz_thresholds
+  param <- params$fitness_params$output_vars_defuzz_thresholds
+  stop_if((length(param) == 1 && is.na(param)) || length(param) != nb_out_vars, 
+    'bad param "output_vars_defuzz_thresholds", must be of length %i', nb_out_vars)
+
+ 
+}
+
 #' utility to build the Fuzzy Coco parameters data structure
 #' @param nb_rules              (mandatory) the number of rules in the fuzzy system
 #' @param nb_max_var_per_rule   (mandatory) The maximum number of antecedents (input variables) to use in each rule.
@@ -65,7 +93,7 @@ params <- function(nb_rules, nb_max_var_per_rule,
   mfs.mut_flip_genome = 0.5,
   mfs.mut_flip_bit = 0.025,
 
-  output_vars_defuzz_thresholds = list(),
+  output_vars_defuzz_thresholds = NA,
 
   metricsw.sensitivity = 1.0,
   metricsw.specificity = 0.8,

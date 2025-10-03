@@ -74,12 +74,12 @@ unregister_fuzzy_coco_parsnip <- function() {
 
 register_parsnip_models <- function() {
   parsnip::set_new_model(FUZZY_COCO_MODEL)
-  parsnip::set_model_mode(FUZZY_COCO_MODEL, "classification")
-  parsnip::set_model_mode(FUZZY_COCO_MODEL, "regression")
+  parsnip::set_model_mode(FUZZY_COCO_MODEL, CLASSIFICATION)
+  parsnip::set_model_mode(FUZZY_COCO_MODEL, REGRESSION)
 
   for (engine in FUZZY_COCO_ENGINES) {
-    parsnip::set_model_engine(FUZZY_COCO_MODEL, mode = "classification", eng = engine)
-    parsnip::set_model_engine(FUZZY_COCO_MODEL, mode = "regression", eng = engine)
+    parsnip::set_model_engine(FUZZY_COCO_MODEL, mode = CLASSIFICATION, eng = engine)
+    parsnip::set_model_engine(FUZZY_COCO_MODEL, mode = REGRESSION, eng = engine)
   }
 }
 
@@ -88,7 +88,7 @@ register_parsnip_fits <- function() {
     parsnip::set_fit(
       model = FUZZY_COCO_MODEL,
       eng = engine,
-      mode = "classification",
+      mode = CLASSIFICATION,
       value = list(
         interface = "formula",
         protect = c("formula", "data"), 
@@ -100,7 +100,7 @@ register_parsnip_fits <- function() {
     parsnip::set_fit(
       model = FUZZY_COCO_MODEL,
       eng = engine,
-      mode = "regression",
+      mode = REGRESSION,
       value = list(
         interface = "formula",
         protect = c("formula", "data"), 
@@ -116,7 +116,7 @@ register_parsnip_fits <- function() {
     parsnip::set_encoding(
       model = FUZZY_COCO_MODEL,
       eng = engine,
-      mode = "classification",
+      mode = CLASSIFICATION,
       options = list(
         predictor_indicators = "one_hot", 
         compute_intercept = FALSE,
@@ -128,7 +128,7 @@ register_parsnip_fits <- function() {
     parsnip::set_encoding(
       model = FUZZY_COCO_MODEL,
       eng = engine,
-      mode = "regression",
+      mode = REGRESSION,
       options = list(
         predictor_indicators = "one_hot", 
         compute_intercept = FALSE,
@@ -148,7 +148,7 @@ register_parsnip_preds <- function() {
     parsnip::set_pred(
       model = FUZZY_COCO_MODEL,
       eng = engine,
-      mode = "classification",
+      mode = CLASSIFICATION,
       type = "prob",
       value = list(
         pre = NULL,
@@ -168,7 +168,7 @@ register_parsnip_preds <- function() {
     parsnip::set_pred(
       model = FUZZY_COCO_MODEL,
       eng = engine,
-      mode = "classification",
+      mode = CLASSIFICATION,
       type = "class",
       value = list(
         pre = NULL,
@@ -190,7 +190,7 @@ register_parsnip_preds <- function() {
     parsnip::set_pred(
       model = FUZZY_COCO_MODEL,
       eng = engine,
-      mode = "regression",
+      mode = REGRESSION,
       type = "numeric",
       value = list(
         pre = NULL,

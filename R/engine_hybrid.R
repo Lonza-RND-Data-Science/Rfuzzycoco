@@ -2,7 +2,15 @@
 
 
 # just a wrapper on FuzzyCocoWrapper
-new_hybrid_engine <- function(data, nb_out_vars, params, seed, verbose = FALSE) {
+new_hybrid_engine <- function(mode = c("classification", "regression"), data, nb_out_vars, params, seed, verbose = FALSE) {
+  mode <- match.arg(mode)
+  stop_unless(is.data.frame(data), "data must be a data.frame.")
+
+  # build the response data
+  y <- data[seq.int(length.out = nb_out_vars, to = length(data))]
+  params <- resolve_params(params, y, mode == REGRESSION)
+  check_params(params, nb_out_vars)
+  
   new(FuzzyCocoWrapper, data, nb_out_vars, params, seed, verbose)
 }
 
@@ -63,8 +71,6 @@ fuzzycoco_fit_df_hybrid <- function(model, x, y,
     max_fitness = model$params$global_params$max_fitness
   ), verbose = model$verbose, progress = TRUE) 
 {
-  stop_unless(length(model$params$fitness_params$output_vars_defuzz_thresholds) == ncol(y),
-    "bad params$fitness_params$output_vars_defuzz_thresholds, must be defined for all output vars")
 
   progressr <- progress && requireNamespace("progressr")
   max_gen <- until() %||% model$params$global_params$max_generations
@@ -73,7 +79,7 @@ fuzzycoco_fit_df_hybrid <- function(model, x, y,
 
   data <- cbind(x, y)
 
-  engine <- new_hybrid_engine(data, ncol(y), model$params, model$seed, verbose = verbose)
+  engine <- new_hybrid_engine(model$mode, data, ncol(y), model$params, model$seed, verbose = verbose)
   start_engine(engine)
   # if (progress) pb$tick(0)
   last_fitness <- last_percent <- it <- 0

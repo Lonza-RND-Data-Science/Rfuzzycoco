@@ -1,9 +1,9 @@
 .fit.fuzzycoco_model <- 
 test_that("fit.fuzzycoco_model", {
-  CASE <- MTCARS_MULTI_OUTPUT()
+  CASE <- example_mtcars()
   df <- CASE$data
   pms <- CASE$params
-  pms$fitness_params$output_vars_defuzz_thresholds <- list(20)
+
 
   ####################### regression one variable ########################
   model <- fuzzycoco("regression", pms, seed = 123)
@@ -17,7 +17,6 @@ test_that("fit.fuzzycoco_model", {
   expect_identical(fit, ref_fit)
 
   ####################### regression 2 variables and selected regressor ########################
-  pms$fitness_params$output_vars_defuzz_thresholds <- list(20, 10)
   model <- fuzzycoco("regression", pms, seed = 123)
   
   fit <- fit(model, cbind(qsec, hp) ~ wt, df, engine = "rcpp", max_generations = 10)
@@ -33,8 +32,6 @@ test_that("fit.fuzzycoco_model", {
   expect_identical(fit2, fit)
 
   ####################### classification one variable ########################
-  # N.B: no threshold set
-  pms$fitness_params$output_vars_defuzz_thresholds <- list()
 
   # fix output_vars_params
   pms$output_vars_params$nb_sets <- 2

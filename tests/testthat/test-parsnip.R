@@ -23,8 +23,7 @@ test_that("parsnip_classification_fit", {
   pms <- params(nb_rules = 1, nb_max_var_per_rule = 2, rules.pop_size = 20, mfs.pop_size = 20, 
     ivars.nb_sets = 2, ivars.nb_bits_vars = 3,  ivars.nb_bits_sets = 2, ivars.nb_bits_pos = 8, 
     ovars.nb_sets = 2, ovars.nb_bits_vars = 1, ovars.nb_bits_sets = 1, ovars.nb_bits_pos = 1, 
-    metricsw.sensitivity = 1, metricsw.specificity = 1,
-    output_vars_defuzz_thresholds = 0.5)
+    metricsw.sensitivity = 1, metricsw.specificity = 1)
 
   spec <- fuzzy_coco_parsnip("classification",  params = pms, seed = 123)
   # try again to test double-registration
@@ -71,13 +70,11 @@ test_that("parsnip_classification_fit", {
 
 .parsnip_regression_fit <- 
 test_that("parsnip_regression_fit", {
-  CASE <- MTCARS_MULTI_OUTPUT()
+  CASE <- example_mtcars()
   df <- CASE$data
   pms <- CASE$params
 
   ### regression 1 var
-
-  pms$fitness_params$output_vars_defuzz_thresholds <- median(df$qsec)
 
   spec <- fuzzy_coco_parsnip("regression",  params = pms, seed = 123)
   # try again to test double-registration
@@ -122,7 +119,6 @@ test_that("parsnip_regression_fit", {
 
 
   ################  regression 2 vars #################
-  pms$fitness_params$output_vars_defuzz_thresholds <- lapply(df[c("qsec", "wt")], median)
   spec <- fuzzy_coco_parsnip("regression",  params = pms, seed = 123)
 
   fit <- parsnip::fit(spec, cbind(qsec, wt) ~ ., data = df)

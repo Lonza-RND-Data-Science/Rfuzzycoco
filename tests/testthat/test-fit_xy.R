@@ -1,13 +1,11 @@
 
 .fit_xy.fuzzycoco_model__classification <- 
 test_that("fit_xy.fuzzycoco_model__classification", {
-  CASE <- MTCARS_MULTI_OUTPUT()
+  CASE <- example_mtcars()
   df <- CASE$data
   pms <- CASE$params
   pms$global_params$max_generations <- 20
 
-  # N.B: no threshold set
-  pms$fitness_params$output_vars_defuzz_thresholds <- list()
 
   ####################### classification: one  variable ########################
   pms$output_vars_params$nb_sets <- 2
@@ -23,7 +21,7 @@ test_that("fit_xy.fuzzycoco_model__classification", {
 
   ref_model <- model
   ref_model$params$global_params$max_generations <- 20
-  ref_model$params$fitness_params$output_vars_defuzz_thresholds <- 0.5
+
   y2 <- y
   y2[[1]] <- process_classification_response(y[[1]], median(y[[1]]))
   df2 <- cbind(x, y2)
@@ -47,7 +45,7 @@ test_that("fit_xy.fuzzycoco_model__classification", {
 
   ref_model <- model
   df2 <- cbind(x, y2)
-  ref_model$params$fitness_params$output_vars_defuzz_thresholds <- as.list(rep(0.5, 2))
+
   ref_fit <- fuzzycoco_fit_df_rcpp(ref_model, df2, responses = c("qsec", "hp"))
   expect_identical(fit, ref_fit)
 
@@ -61,7 +59,7 @@ test_that("fit_xy.fuzzycoco_model__classification", {
 
 .fit_xy.fuzzycoco_model__regression <- 
 test_that("fit_xy.fuzzycoco_model__regression", {
-  CASE <- MTCARS_MULTI_OUTPUT()
+  CASE <- example_mtcars()
   df <- CASE$data
   pms <- CASE$params
   pms$fitness_params$output_vars_defuzz_thresholds <- list(20)

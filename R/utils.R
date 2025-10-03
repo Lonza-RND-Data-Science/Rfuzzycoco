@@ -44,6 +44,7 @@ extract_error_message <- function(err) {
 }
 
 is_condition_true <- function(cond) {
+  force(cond)
   if (length(cond) != 1) stop('condition must be a scalar')
   if (is.na(cond)) stop('condiction must not be missing (NA)')
 

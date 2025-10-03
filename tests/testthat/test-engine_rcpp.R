@@ -4,12 +4,11 @@
 
 .fuzzycoco_fit_df_rcpp <- 
 test_that("fuzzycoco_fit_df_rcpp", {
-  CASE <- MTCARS_MULTI_OUTPUT()
+  CASE <- example_mtcars()
   df <- CASE$data
 
   ####################### regression one variable ########################
   pms <- CASE$params
-  pms$fitness_params$output_vars_defuzz_thresholds <- list(20)
 
   model <- fuzzycoco("regression", pms, seed = 123)
   
@@ -17,7 +16,7 @@ test_that("fuzzycoco_fit_df_rcpp", {
   
   expect_s3_class(fit, "fuzzycoco_fit")
   expect_identical(fit$engine, "rcpp")
-  expect_identical(fit$mode, "regression")
+  expect_identical(fit$mode, REGRESSION)
   expect_equal(fit$seed, 123)
 
 
@@ -46,7 +45,7 @@ test_that("fuzzycoco_fit_df_rcpp", {
 
 
   ####################### regression two variables ########################
-  pms$fitness_params$output_vars_defuzz_thresholds <- list(20, 10)
+  pms$fitness_params$output_vars_defuzz_thresholds <- NA
   model <- fuzzycoco("regression", pms, seed = 123)
   df <- CASE$data
   
@@ -60,7 +59,7 @@ test_that("fuzzycoco_fit_df_rcpp", {
   ##################### categorical vars 
   ### in response
   CASE <- IRIS_CATEGORICAL_BINARY()
-  pms$fitness_params$output_vars_defuzz_thresholds <- 0.5
+  pms$fitness_params$output_vars_defuzz_thresholds <- NA
   model <- fuzzycoco("regression", pms, seed = 123)
 
   expect_error(fuzzycoco_fit_df_rcpp(model, CASE$data, responses = "Species"), "only numeric columns")

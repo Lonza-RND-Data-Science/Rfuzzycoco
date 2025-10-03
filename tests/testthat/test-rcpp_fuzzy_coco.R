@@ -79,10 +79,12 @@ test_that("iris36", {
 
 .multi_ouput <- 
 test_that("multi_ouput", {
-  CASE <- MTCARS_MULTI_OUTPUT()
+  CASE <- example_mtcars()
   df <- CASE$data
 
-  res <- rcpp_fuzzy_coco_searchBestFuzzySystem(df, 2, CASE$params, seed = 123)
+  params <- resolve_params(CASE$params, df[c("wt", "qsec")], TRUE)
+
+  res <- rcpp_fuzzy_coco_searchBestFuzzySystem(df, 2, params, seed = 123)
 
   rules <- res$fuzzy_system$rules
   expect_setequal(names(rules[[1]]$consequents), "qsec")

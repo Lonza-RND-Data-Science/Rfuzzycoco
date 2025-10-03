@@ -5,6 +5,21 @@
 #' @param ...   not used. Only for S3 generic consistency
 #' @inherit evaluate_fuzzy_system
 #' @export
+#' @examples
+#' pms <- params(
+#'  nb_rules = 2, nb_max_var_per_rule = 3,        # structural parameters
+#'  rules.pop_size = 100, mfs.pop_size = 100,     # coevolution population sizes
+#'  ivars.nb_sets = 3, , ivars.nb_bits_pos = 8,   # input vars: 3 fuzzy sets, and 8 bits to discretize the values 
+#'  ovars.nb_sets = 3, ovars.nb_bits_pos = 8,     # output vars: 3 fuzzy sets, and 8 bits to discretize the values 
+#'  metricsw.sensitivity = 0, metricsw.specificity = 0, metricsw.rmse = 1, # we just use RMSE (root mean square error)
+#'  output_vars_defuzz_thresholds = 17            # threshold for the qsec output variable
+#')
+#' model <- fuzzycoco("regression", pms, seed = 123)
+#' df <- mtcars[c("mpg", "hp", "wt", "qsec")]
+#' fit <- fit(model, qsec ~ ., df, engine = "rcpp", seed = 456, max_generations = 20)
+#' 
+#' res <- evaluate(fit, df)
+#' print(res$fitness)
 evaluate.fuzzycoco_fit <- function(x, data, verbose = FALSE, ...) 
 {
   evaluate_fuzzy_system(x$fuzzy_system, data, x$params, verbose = verbose)
@@ -20,6 +35,23 @@ evaluate.fuzzycoco_fit <- function(x, data, verbose = FALSE, ...)
 #' 
 #' @return the evaluation as a named list
 #' @export
+#' @examples
+#' pms <- params(
+#'  nb_rules = 2, nb_max_var_per_rule = 3,        # structural parameters
+#'  rules.pop_size = 100, mfs.pop_size = 100,     # coevolution population sizes
+#'  ivars.nb_sets = 3, , ivars.nb_bits_pos = 8,   # input vars: 3 fuzzy sets, and 8 bits to discretize the values 
+#'  ovars.nb_sets = 3, ovars.nb_bits_pos = 8,     # output vars: 3 fuzzy sets, and 8 bits to discretize the values 
+#'  metricsw.sensitivity = 0, metricsw.specificity = 0, metricsw.rmse = 1, # we just use RMSE (root mean square error)
+#'  output_vars_defuzz_thresholds = 17            # threshold for the qsec output variable
+#')
+#' model <- fuzzycoco("regression", pms, seed = 123)
+#' x <- mtcars[c("mpg", "hp", "wt")]
+#' y <- mtcars["qsec"]
+#' fit <- fit_xy(model, x, y, progress = FALSE)
+#' 
+#' res <- evaluate_fuzzy_system(fit$fuzzy_system, cbind(x, y), fit$params)
+#' print(res$metrics$rmse)
+#' 
 evaluate_fuzzy_system <- function(fs, data, params, verbose = FALSE) 
 {
   nb_vars <- length(fs$variables$input) + length(fs$variables$output)

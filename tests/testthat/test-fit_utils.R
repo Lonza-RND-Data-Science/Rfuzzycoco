@@ -1,9 +1,8 @@
 .fs_rules_to_df <- 
 test_that("fs_rules_to_df", {
-  CASE <- MTCARS_MULTI_OUTPUT()
+  CASE <- example_mtcars()
 
   pms <- CASE$params
-  pms$fitness_params$output_vars_defuzz_thresholds <- list(0, 0)
   model <- fuzzycoco("regression", pms, seed = 123)
   fit <- fit(model, cbind(qsec, hp) ~ wt, CASE$data, max_generations = 10)
 
@@ -45,7 +44,7 @@ test_that("fs_rules_to_df", {
   ### 
   pms$global_params$nb_rules <- 1
   pms$global_params$nb_max_var_per_rule <- 1
-  pms$fitness_params$output_vars_defuzz_thresholds <- 0
+
   model <- fuzzycoco("regression", pms, seed = 123)
   fit <- fit(model, qsec ~ ., CASE$data, seed = 345, max_generations = 5)
 

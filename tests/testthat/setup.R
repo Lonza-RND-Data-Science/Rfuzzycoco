@@ -22,23 +22,7 @@ IRIS36 <- function() {
   list(data = df, params = pms, rules = rules)
 }
 
-# an example dataset based on mtcars
-# to test a regression on multiple output variables
 
-MTCARS_MULTI_OUTPUT <- function() {
-  lst <- params(
-    nb_rules = 2, nb_max_var_per_rule = 3, rules.pop_size = 20, mfs.pop_size = 20, 
-    ivars.nb_sets = 3, ivars.nb_bits_vars = 3,  ivars.nb_bits_sets = 2, ivars.nb_bits_pos = 8, 
-    ovars.nb_sets = 3, ovars.nb_bits_vars = 1, ovars.nb_bits_sets = 2, ovars.nb_bits_pos = 8, 
-    metricsw.sensitivity = 0, metricsw.specificity = 0, metricsw.rmse = 1,
-    output_vars_defuzz_thresholds = list(3, 17)
-  )
-
-  list(
-      data = mtcars[c("mpg", "hp", "wt", "qsec")], 
-      params = lst
-  )
-}
 
 # an example dataset based on iris with a binary categorical (non-factor) response
 IRIS_CATEGORICAL_BINARY <- function() {

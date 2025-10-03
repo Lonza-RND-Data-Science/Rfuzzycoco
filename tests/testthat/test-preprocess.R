@@ -2,7 +2,7 @@
 
 .preprocess_y_classification <- 
 test_that("preprocess_y_classification", {
-  CASE <- MTCARS_MULTI_OUTPUT()
+  CASE <- example_mtcars()
   df <- CASE$data
 
   ####################### one numerical variable ########################

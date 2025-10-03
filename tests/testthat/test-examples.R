@@ -21,10 +21,10 @@ test_that("IRIS36", {
   expect_true(is.list(case$rules$seed123))
 })
 
-.MTCARS_MULTI_OUTPUT <- 
-test_that("MTCARS_MULTI_OUTPUT", {
+.example_mtcars <- 
+test_that("example_mtcars", {
 
-  case <- MTCARS_MULTI_OUTPUT()
+  case <- example_mtcars()
   df <- case$data
   expect_equal(nrow(df), nrow(mtcars))
   expect_identical(names(df),  c("mpg", "hp", "wt", "qsec"))

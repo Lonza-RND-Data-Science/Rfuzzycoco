@@ -4,9 +4,9 @@
 \name{Rfuzzycoco-package}
 \alias{Rfuzzycoco}
 \alias{Rfuzzycoco-package}
-\title{Rfuzzycoco: Provides an R Interface to the FuzzyCoco C++ Library and extends it}
+\title{Rfuzzycoco: Provides an R Interface to the FuzzyCoco C++ Library and Extends it}
 \description{
-Provides an R Interface to the FuzzyCoco C++ Library and extends it.
+Provides and extends the Fuzzy Coco algorithm by wrapping the 'FuzzyCoco' C++ Library, cf \url{https://github.com/Lonza-RND-Data-Science/fuzzycoco}. Fuzzy Coco constructs systems that predict the outcome of a human decision-making process while providing an understandable explanation of a possible reasoning leading to it. The constructed fuzzy systems are composed of rules and linguistic variables.
 }
 \section{Features}{
 
