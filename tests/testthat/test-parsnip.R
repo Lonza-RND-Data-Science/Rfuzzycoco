@@ -15,8 +15,7 @@ test_that("unregister_fuzzy_coco_parsnip", {
 .parsnip_classification_fit <- 
 test_that("parsnip_classification_fit", {
 
-  df <- utils::type.convert(utils::read.csv2(IRIS36_CSV_PATH), as.is = TRUE)
-  df[[1]] <- NULL
+  df <- example_iris36()$data
   df$OUT <- as.factor(df$OUT)
   levels(df$OUT) <- c("LOW", "HIGH")
 

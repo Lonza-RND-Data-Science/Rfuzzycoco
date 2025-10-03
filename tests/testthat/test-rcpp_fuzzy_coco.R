@@ -23,16 +23,26 @@ test_that("rcpp_fuzzy_coco_searchBestFuzzySystem", {
 
 .iris36 <- 
 test_that("iris36", {
-  CASE <- IRIS36()
+  CASE <- example_iris36()
   df <- CASE$data
 
-  res <- rcpp_fuzzy_coco_searchBestFuzzySystem(df, 1, CASE$params, seed = 123)
+  params <- resolve_params(CASE$params, df["OUT"], FALSE)
+
+  res <- rcpp_fuzzy_coco_searchBestFuzzySystem(df, 1, params, seed = 123)
 
   expect_true(is.list(res))
   expect_equal(res$fit$fitness, 1)
   expect_equal(res$fit$generations, 3)
 
-  expect_equal(res$fuzzy_system$rules, CASE$rules$seed123)
+  expected_rules <- list(
+    rule1 = list(
+      antecedents = list(Petal.Width = list(Petal.Width.1 = 0.817888563049853)), 
+      consequents = list(OUT = list(OUT.1 = 0))
+    )
+  )
+  
+
+  expect_equal(res$fuzzy_system$rules, expected_rules)
 
   ### predict
   dfout <- rcpp_fuzzy_coco_predict(df, res$fuzzy_system, verbose = FALSE)
@@ -42,7 +52,7 @@ test_that("iris36", {
 
   ### eval
   ## eval with same dataset
-  res2 <- rcpp_fuzzy_coco_eval(df, res$fuzzy_system, CASE$params, verbose = FALSE)
+  res2 <- rcpp_fuzzy_coco_eval(df, res$fuzzy_system, params, verbose = FALSE)
   # n.B: all positives are true
   expect_equal(res2$metrics$true_positives, 18)
   expect_equal(res2$metrics$true_negatives, 18)
@@ -55,7 +65,7 @@ test_that("iris36", {
   df2 <- df
   df2$OUT <- 1
 
-  res2 <- rcpp_fuzzy_coco_eval(df2, res$fuzzy_system, CASE$params, verbose = FALSE)
+  res2 <- rcpp_fuzzy_coco_eval(df2, res$fuzzy_system, params, verbose = FALSE)
   
   expect_lt(res2$fitness, 0.35)
   ## N.B: all predicted negatives are actually positives according to df2 --> false negatives
@@ -66,7 +76,7 @@ test_that("iris36", {
   df2 <- df
   df2$OUT <- 1 - df$OUT
 
-  res2 <- rcpp_fuzzy_coco_eval(df2, res$fuzzy_system, CASE$params, verbose = FALSE)
+  res2 <- rcpp_fuzzy_coco_eval(df2, res$fuzzy_system, params, verbose = FALSE)
   
   expect_lt(res2$fitness, 0.1)
   ## N.B: all predicted negatives are actually positives according to df2 --> false negatives
@@ -100,7 +110,7 @@ test_that("multi_ouput", {
 
 .iris36_params2 <- 
 test_that("iris36_params2", {
-  CASE <- IRIS36()
+  CASE <- example_iris36()
 
   pms <- params(nb_rules = 1, nb_max_var_per_rule = 2, rules.pop_size = 20, mfs.pop_size = 20, 
     ivars.nb_sets = 2, ivars.nb_bits_vars = 3,  ivars.nb_bits_sets = 2, ivars.nb_bits_pos = 8, 

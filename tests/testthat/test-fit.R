@@ -67,7 +67,7 @@ test_that("fit.fuzzycoco_model", {
   expect_identical(fit, ref_fit)
 
   ##################### categorical vars 
-  CASE <- IRIS_CATEGORICAL_BINARY()
+  CASE <- example_iris_binary_categorical()
 
   pms$fitness_params$output_vars_defuzz_thresholds <- 0.5
   model <- fuzzycoco("regression", pms, seed = 123)

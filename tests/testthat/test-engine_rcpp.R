@@ -58,7 +58,7 @@ test_that("fuzzycoco_fit_df_rcpp", {
 
   ##################### categorical vars 
   ### in response
-  CASE <- IRIS_CATEGORICAL_BINARY()
+  CASE <- example_iris_binary_categorical()
   pms$fitness_params$output_vars_defuzz_thresholds <- NA
   model <- fuzzycoco("regression", pms, seed = 123)
 

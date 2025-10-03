@@ -100,7 +100,7 @@ test_that("fit_xy.fuzzycoco_model__regression", {
   expect_error(fit_xy(model, iris, iris["Species"], engine = "rcpp"), "non numerical response")
 
   ##################### categorical vars 
-  CASE <- IRIS_CATEGORICAL_BINARY()
+  CASE <- example_iris_binary_categorical()
   df <- CASE$data
   pms$fitness_params$output_vars_defuzz_thresholds <- 0.5
   model <- fuzzycoco("regression", pms, seed = 123)

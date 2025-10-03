@@ -1,25 +1,5 @@
 
 
-remove_comments <- function(lines) {
-  # inline comments
-  lines <- sub("\\s*#[^\"].*", "", lines)
-  # fully commented lines
-  lines <- sub("^\\s*#.*", "", lines)
-  lines[nzchar(lines)]
-}
-
-load_params_json <- function(path) {
-  lines <- remove_comments(readLines(path))
-  lst <- jsonlite::parse_json(lines)
-  lst <- complete_params_with_defaults(lst)
-}
-
-complete_params_with_defaults <- function(lst) {
-  defaults <- params(NA, NA)
-  lst <- lst %||% list()
-  utils::modifyList(defaults, lst)
-}
-
 # resolve unset parameters (NA) with sane defaults for the given response data
 resolve_params <- function(params, y, is_regression) {
   stop_unless(is.data.frame(y), "y must be a data.frame.")
