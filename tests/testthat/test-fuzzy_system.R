@@ -1,66 +1,29 @@
-FS_JSON <- '
-{
-  "variables": {
-    "input": {
-      "mpg": {
-        "mpg.1": 15.4686,
-        "mpg.2": 17.1275,
-        "mpg.3": 19.1549
-      },
-      "hp": {
-        "hp.1": 95.2824,
-        "hp.2": 137.4549,
-        "hp.3": 228.4588
-      },
-      "wt": {
-        "wt.1": 3.0621,
-        "wt.2": 3.0927,
-        "wt.3": 4.151
-      }
-    },
-    "output": {
-      "qsec": {
-        "qsec.1": 16.6082,
-        "qsec.2": 16.7729,
-        "qsec.3": 20.7918
-      }
-    }
-  },
-  "rules": {
-    "rule1": {
-      "antecedents": {
-        "wt": {
-          "wt.1": 3.0621
-        },
-        "mpg": {
-          "mpg.2": 17.1275
-        }
-      },
-      "consequents": {
-        "qsec": {
-          "qsec.1": 16.6082
-        }
-      }
-    },
-    "rule2": {
-      "antecedents": {
-        "hp": {
-          "hp.1": 95.2824
-        }
-      },
-      "consequents": {
-        "qsec": {
-          "qsec.3": 20.7918
-        }
-      }
-    }
-  },
-  "default_rules": {
-    "qsec": "qsec.2"
-  }
-}
-'
-FS <- jsonlite::fromJSON(FS_JSON)
+
+FS <- list(
+  variables = list(input = list(mpg = list(
+    mpg.1 = 15.4686,
+    mpg.2 = 17.1275, mpg.3 = 19.1549
+  ), hp = list(
+    hp.1 = 95.2824,
+    hp.2 = 137.4549, hp.3 = 228.4588
+  ), wt = list(
+    wt.1 = 3.0621,
+    wt.2 = 3.0927, wt.3 = 4.151
+  )), output = list(qsec = list(
+    qsec.1 = 16.6082, qsec.2 = 16.7729, qsec.3 = 20.7918
+  ))),
+  rules = list(rule1 = list(antecedents = list(
+    wt = list(wt.1 = 3.0621),
+    mpg = list(mpg.2 = 17.1275)
+  ), consequents = list(qsec = list(
+    qsec.1 = 16.6082
+  ))), rule2 = list(antecedents = list(
+    hp = list(hp.1 = 95.2824)
+  ), consequents = list(qsec = list(
+    qsec.3 = 20.7918
+  )))), default_rules = list(qsec = "qsec.2")
+)
+
 
 .fs_replace_positions <- 
 test_that("fs_replace_positions", {
