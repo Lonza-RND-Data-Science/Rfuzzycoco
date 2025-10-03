@@ -6,6 +6,10 @@
 #' by the distribution of the data (cf [compute_optimal_quantile_fuzzy_set_positions()] and the rules
 #' are systematically explored
 #' 
+#' N.B: this is experimental, only possible for a small number of variables.
+#' Not all parameters are used, obviously, and currently fitness_params$output_vars_defuzz_thresholds
+#' has to be set explicitly.
+#'
 #' @param fitter  a function metrics --> fitness value providing the objective/fitness function to optimize
 #'  TODO: describe the metrics
 #' @inheritParams shared_params
@@ -13,7 +17,22 @@
 #' @return a list of the best results (all ties). Each result is also a named list(metric=,fs=) holding the 
 #'  corresponding metric value and the fuzzy system.
 #' @export
+#' @examples
+#' fitter <- function(metrics) 2^-metrics$rms
+#' params <- example_mtcars()$params
+#' params$fitness_params$output_vars_defuzz_thresholds <- 0
+#' params$global_params$nb_rules <- 1
+#' params$global_params$nb_max_var_per_rule <- 2
+#' params$output_vars_params$nb_sets <- 2
+#' 
+#' x <- mtcars[c("mpg", "hp", "wt")]
+#' y <- mtcars["qsec"]
+#' fit <- fuzzy_coco_systematic_fit(x, y, params, fitter)
 fuzzy_coco_systematic_fit <- function(x, y, params, fitter) {
+  param <- params$fitness_params$output_vars_defuzz_thresholds
+  stop_unless(length(param) == length(y) && !any(is.na(param)), 
+    "'params$fitness_params$output_vars_defuzz_thresholds' must be set explicitly")
+
   invars <- names(x)
   outvars <- names(y)
   fs <- list(
@@ -169,13 +188,16 @@ compute_optimal_quantile_fuzzy_set_positions_vec <- function(x, nb_sets) {
   unname(y[c(-1, -length(y))])
 }
 
-#' compute the optimal fuzzy set positions based on the the distribution of the data
+#' computes the optimal fuzzy set positions based on the distribution of the data
 #' 
 #' @param df        the data as a data frame
 #' @param nb_sets   the number of fuzzy sets
 #' 
 #' @return a list, named after the df column names, holding the vector of positions per variable
 #' @export
+#' @examples
+#' pos <- compute_optimal_quantile_fuzzy_set_positions(mtcars, 3)
+#' print("position for 2nd fuzzy set for qsec var", pos$qsec[[2]])
 compute_optimal_quantile_fuzzy_set_positions <- function(df, nb_sets) {
   lapply(df, compute_optimal_quantile_fuzzy_set_positions_vec, nb_sets)
 }

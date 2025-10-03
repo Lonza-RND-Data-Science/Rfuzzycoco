@@ -30,8 +30,8 @@ example_mtcars <- function() {
 #'  - data: the data to fit as a data frame
 #' @export
 #' @examples 
-#'  model <- fuzzycoco("classification", example_iris36()$params)
-#'  fit <- fit(model, qsec ~ ., example_iris36()$data, max_generations = 20, progress = FALSE)
+#'  model <- fuzzycoco("classification", example_iris36()$params, seed = 123)
+#'  fit <- fit(model, OUT ~ ., example_iris36()$data, max_generations = 20, progress = FALSE)
 example_iris36 <- function() {
  pms <- params(
     nb_rules = 3, nb_max_var_per_rule = 3, 
@@ -65,7 +65,7 @@ example_iris36 <- function() {
 #' @export
 #' @examples 
 #'  model <- fuzzycoco("classification", example_iris_binary_categorical()$params)
-#'  fit <- fit(model, qsec ~ ., example_iris_binary_categorical()$data, max_generations = 20, progress = FALSE)
+#'  fit <- fit(model, Species ~ ., example_iris_binary_categorical()$data, max_generations = 20, progress = FALSE)
 example_iris_binary_categorical <- function() {
   df <- rbind(head(iris), tail(iris))
   df$Species <- as.character(df$Species)

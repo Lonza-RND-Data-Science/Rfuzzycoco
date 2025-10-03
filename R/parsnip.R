@@ -8,6 +8,9 @@ FUZZY_COCO_MODEL <- "fuzzy_coco"
 #' 
 #' @inheritParams shared_params
 #' @export
+#' @examples 
+#' spec <- fuzzy_coco_parsnip("regression",  params = example_mtcars()$params, seed = 123)
+#' fit <- spec |> parsnip::set_engine("hybrid") |> parsnip::fit(qsec ~ ., data = example_mtcars()$data)
 fuzzy_coco_parsnip <- function(mode = "unknown", params, 
   engine = FUZZY_COCO_HYBRID_ENGINE, seed = sample.int(10^5, 1), verbose = FALSE) 
 {
@@ -28,12 +31,14 @@ fuzzy_coco_parsnip <- function(mode = "unknown", params,
   )
 }
 
+
 #' this is an utility function used to implement the parsnip interface
 #' 
 #' It should not be exported, it only is because of parsnip internal implementation
 #' @param object,internal_model,fit,df,pred,type,... no comment
 #' @inheritParams shared_params
 #' @export
+#' @keywords internal
 fuzzy_coco_parsnip_wrapper <- function(formula, data, object = NULL, internal_model = NULL, engine = NULL, 
   fit = NULL, df = NULL, pred = FALSE, type = NULL, ...) {
 

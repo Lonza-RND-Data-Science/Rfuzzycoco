@@ -15,6 +15,13 @@ a one-row data frame, in columns the input and ouput variables, with TRUE iff th
 \description{
 extract the usage of the variables by a fuzzy system
 }
+\examples{
+model <- fuzzycoco("regression", example_mtcars()$params, seed = 123)
+df <- mtcars[c("mpg", "hp", "wt", "qsec")]
+fit <- fit(model, qsec ~ ., df, seed = 456, max_generations = 10, progress = FALSE)
+
+print(fs_rules_to_df(fit$fuzzy_system))
+}
 \seealso{
 Other fit_utils: 
 \code{\link{fit_to_df}()},

@@ -18,5 +18,5 @@ an example dataset based on iris with a binary categorical (non-factor) response
 }
 \examples{
  model <- fuzzycoco("classification", example_iris_binary_categorical()$params)
- fit <- fit(model, qsec ~ ., example_iris_binary_categorical()$data, max_generations = 20, progress = FALSE)
+ fit <- fit(model, Species ~ ., example_iris_binary_categorical()$data, max_generations = 20, progress = FALSE)
 }

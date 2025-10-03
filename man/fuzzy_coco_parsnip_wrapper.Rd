@@ -29,3 +29,4 @@ fuzzy_coco_parsnip_wrapper(
 \description{
 It should not be exported, it only is because of parsnip internal implementation
 }
+\keyword{internal}

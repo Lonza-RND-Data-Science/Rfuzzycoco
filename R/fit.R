@@ -13,17 +13,9 @@
 #' @return a named list 
 #' @export
 #' @examples
-#' pms <- params(
-#'  nb_rules = 2, nb_max_var_per_rule = 3,        # structural parameters
-#'  rules.pop_size = 100, mfs.pop_size = 100,     # coevolution population sizes
-#'  ivars.nb_sets = 3, , ivars.nb_bits_pos = 8,   # input vars: 3 fuzzy sets, and 8 bits to discretize the values 
-#'  ovars.nb_sets = 3, ovars.nb_bits_pos = 8,     # output vars: 3 fuzzy sets, and 8 bits to discretize the values 
-#'  metricsw.sensitivity = 0, metricsw.specificity = 0, metricsw.rmse = 1, # we just use RMSE (root mean square error)
-#'  output_vars_defuzz_thresholds = 17            # threshold for the qsec output variable
-#')
-#' model <- fuzzycoco("regression", pms, seed = 123)
-#' 
-#' fit <- fit(model, qsec ~ ., mtcars[c("mpg", "hp", "wt", "qsec")], engine = "rcpp", seed = 456, max_generations = 20)
+#' model <- fuzzycoco("regression", example_mtcars()$params, seed = 123)
+#' df <- mtcars[c("mpg", "hp", "wt", "qsec")]
+#' fit <- fit(model, qsec ~ ., df, seed = 456, max_generations = 10, progress = FALSE)
 #' print(names(fit))
 #' 
 fit.fuzzycoco_model <- function(object, formula, data, engine = FUZZY_COCO_HYBRID_ENGINE, 

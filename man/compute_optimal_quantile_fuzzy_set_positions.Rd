@@ -2,7 +2,7 @@
 % Please edit documentation in R/systematic.R
 \name{compute_optimal_quantile_fuzzy_set_positions}
 \alias{compute_optimal_quantile_fuzzy_set_positions}
-\title{compute the optimal fuzzy set positions based on the the distribution of the data}
+\title{computes the optimal fuzzy set positions based on the distribution of the data}
 \usage{
 compute_optimal_quantile_fuzzy_set_positions(df, nb_sets)
 }
@@ -15,5 +15,9 @@ compute_optimal_quantile_fuzzy_set_positions(df, nb_sets)
 a list, named after the df column names, holding the vector of positions per variable
 }
 \description{
-compute the optimal fuzzy set positions based on the the distribution of the data
+computes the optimal fuzzy set positions based on the distribution of the data
+}
+\examples{
+pos <- compute_optimal_quantile_fuzzy_set_positions(mtcars, 3)
+print("position for 2nd fuzzy set for qsec var", pos$qsec[[2]])
 }

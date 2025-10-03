@@ -6,7 +6,7 @@
 \alias{Rfuzzycoco-package}
 \title{Rfuzzycoco: Provides an R Interface to the FuzzyCoco C++ Library and Extends it}
 \description{
-Provides and extends the Fuzzy Coco algorithm by wrapping the 'FuzzyCoco' C++ Library, cf \url{https://github.com/Lonza-RND-Data-Science/fuzzycoco}. Fuzzy Coco constructs systems that predict the outcome of a human decision-making process while providing an understandable explanation of a possible reasoning leading to it. The constructed fuzzy systems are composed of rules and linguistic variables.
+Provides and extends the Fuzzy Coco algorithm by wrapping the 'FuzzyCoco' C++ Library, cf \url{https://github.com/Lonza-RND-Data-Science/fuzzycoco}. Fuzzy Coco constructs systems that predict the outcome of a human decision-making process while providing an understandable explanation of a possible reasoning leading to it. The constructed fuzzy systems are composed of rules and linguistic variables. This package provides a S3 classic interface (fit_xy/fit//predict/evaluate) and a tidymodels/parsnip interface, a custom engine with custom iteration stop criterion and progress bar support as well as a systematic implementation that do not rely on genetic programming but rather explore all possible combinations.
 }
 \section{Features}{
 
