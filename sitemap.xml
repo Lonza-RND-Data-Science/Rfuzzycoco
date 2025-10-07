@@ -5,10 +5,14 @@
 <url><loc>/articles/index.html</loc></url>
 <url><loc>/authors.html</loc></url>
 <url><loc>/index.html</loc></url>
+<url><loc>/news/index.html</loc></url>
 <url><loc>/reference/Rfuzzycoco-package.html</loc></url>
 <url><loc>/reference/compute_optimal_quantile_fuzzy_set_positions.html</loc></url>
 <url><loc>/reference/evaluate.fuzzycoco_fit.html</loc></url>
 <url><loc>/reference/evaluate_fuzzy_system.html</loc></url>
+<url><loc>/reference/example_iris36.html</loc></url>
+<url><loc>/reference/example_iris_binary_categorical.html</loc></url>
+<url><loc>/reference/example_mtcars.html</loc></url>
 <url><loc>/reference/fit.fuzzycoco_model.html</loc></url>
 <url><loc>/reference/fit_to_df.html</loc></url>
 <url><loc>/reference/fit_xy.fuzzycoco_model.html</loc></url>
@@ -21,6 +25,8 @@
 <url><loc>/reference/fuzzycoco_fit_df_hybrid.html</loc></url>
 <url><loc>/reference/index.html</loc></url>
 <url><loc>/reference/params.html</loc></url>
+<url><loc>/reference/predict.fuzzycoco_fit.html</loc></url>
+<url><loc>/reference/predict_fuzzy_system.html</loc></url>
 <url><loc>/reference/reexports.html</loc></url>
 <url><loc>/reference/shared_params.html</loc></url>
 <url><loc>/reference/stop_engine_if_stalling.html</loc></url>

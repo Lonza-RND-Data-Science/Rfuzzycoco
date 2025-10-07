@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Rfuzzycoco</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.0</span>
       </span>
     </div>
 
@@ -35,6 +35,9 @@
       <a href="../articles/getting_started.html">Getting started</a>
     </li>
   </ul></li>
+<li>
+  <a href="../news/index.html">Changelog</a>
+</li>
       </ul><ul class="nav navbar-nav navbar-right"><li>
   <a href="https://github.com/Lonza-RND-Data-Science/Rfuzzycoco/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
@@ -93,7 +96,18 @@
 <dd><p>whether to be verbose</p></dd>
 
 </dl></div>
+    <div id="value">
+    <h2>Value</h2>
+    <p>a parsnip model</p>
+    </div>
 
+    <div id="ref-examples">
+    <h2>Examples</h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">spec</span> <span class="op">&lt;-</span> <span class="fu">fuzzy_coco_parsnip</span><span class="op">(</span><span class="st">"regression"</span>,  params <span class="op">=</span> <span class="fu"><a href="example_mtcars.html">example_mtcars</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">params</span>, seed <span class="op">=</span> <span class="fl">123</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">fit</span> <span class="op">&lt;-</span> <span class="va">spec</span> <span class="op">|&gt;</span> <span class="fu">parsnip</span><span class="fu">::</span><span class="fu"><a href="https://parsnip.tidymodels.org/reference/set_engine.html" class="external-link">set_engine</a></span><span class="op">(</span><span class="st">"hybrid"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">parsnip</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span><span class="va">qsec</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="fu"><a href="example_mtcars.html">example_mtcars</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">data</span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> 'fuzzy_coco_parsnip_wrapper' is not an exported object from 'namespace:Rfuzzycoco'</span>
+</code></pre></div>
+    </div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top"><h2 data-toc-skip>Contents</h2>
