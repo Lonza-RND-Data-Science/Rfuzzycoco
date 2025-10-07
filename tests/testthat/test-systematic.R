@@ -1,7 +1,7 @@
 
 .fuzzy_coco_systematic_fit <- 
 test_that("fuzzy_coco_systematic_fit", {
-  CASE <- MTCARS_MULTI_OUTPUT()
+  CASE <- example_mtcars()
   df <- CASE$data
   pms <- CASE$params
   pms$fitness_params$output_vars_defuzz_thresholds <- 0

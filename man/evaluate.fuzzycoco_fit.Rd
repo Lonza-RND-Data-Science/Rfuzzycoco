@@ -16,8 +16,20 @@
 \item{...}{not used. Only for S3 generic consistency}
 }
 \value{
-the evaluation as a named list
+the evaluation as a named list:
+\itemize{
+\item fitness: the fitness value
+\item metrics: the evaluation metrics as a named list
+}
 }
 \description{
 N.B: just a S3 method method wrapping the \code{\link[=evaluate_fuzzy_system]{evaluate_fuzzy_system()}} function
+}
+\examples{
+model <- fuzzycoco("regression", example_mtcars()$params, seed = 123)
+df <- mtcars[c("mpg", "hp", "wt", "qsec")]
+fit <- fit(model, qsec ~ ., df, engine = "rcpp", seed = 456, max_generations = 20)
+
+res <- evaluate(fit, df)
+print(res$fitness)
 }

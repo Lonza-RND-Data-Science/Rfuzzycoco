@@ -2,7 +2,7 @@
 fuzzycoco_fit_df_rcpp <- function(model, data, responses = tail(names(data), 1), verbose = model$verbose) {
   stop_unless(is.data.frame(data), "bad arg 'data': not a data.frame") 
   # check all column types: currently only numeric
-  bad_cols <- which(!sapply(data, is.numeric))
+  bad_cols <- which(!vapply(data, is.numeric, TRUE))
   stop_if(length(bad_cols), "bad column(s) '%s', only numeric columns are allowed", names(bad_cols))
 
   stop_unless(length(responses) > 0, "bad arg 'responses': empty")
@@ -14,10 +14,12 @@ fuzzycoco_fit_df_rcpp <- function(model, data, responses = tail(names(data), 1),
   ordered_vars <- c(regressors, responses)
   df <- data[ordered_vars]
 
-  stop_unless(length(model$params$fitness_params$output_vars_defuzz_thresholds) == length(responses),
-    "error, you must set a fitness_params$output_vars_defuzz_thresholds for all responses") 
- 
-  res <- rcpp_fuzzy_coco_searchBestFuzzySystem(df, length(responses), model$params, model$seed, verbose)
+  y <- data[responses]
+  params <- resolve_params(model$params, y, model$mode == REGRESSION)
+
+  nb_out_vars <- length(responses)
+  check_params(params, nb_out_vars)
+  res <- rcpp_fuzzy_coco_searchBestFuzzySystem(df, nb_out_vars, params, model$seed, verbose)
   
   new_fuzzycoco_fit(res, mode = model$mode, engine = FUZZY_COCO_RCPP_ENGINE, seed = model$seed)
 }

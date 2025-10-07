@@ -1,23 +1,31 @@
 
 
-remove_comments <- function(lines) {
-  # inline comments
-  lines <- sub("\\s*#[^\"].*", "", lines)
-  # fully commented lines
-  lines <- sub("^\\s*#.*", "", lines)
-  lines[nzchar(lines)]
+# resolve unset parameters (NA) with sane defaults for the given response data
+resolve_params <- function(params, y, is_regression) {
+  stop_unless(is.data.frame(y), "y must be a data.frame.")
+  # output_vars_defuzz_thresholds
+  param <- params$fitness_params$output_vars_defuzz_thresholds
+  if(length(param) == 1 && is.na(param)) {
+    if (is_regression) {
+      # for regression, we take the median of the response vars
+      params$fitness_params$output_vars_defuzz_thresholds <- lapply(y, median)
+    } else {
+      # N.B: for classification, we always use 0.5 by default
+      params$fitness_params$output_vars_defuzz_thresholds <- as.list(rep(0.5, length(y)))
+    }
+  }
+
+  params
 }
 
-load_params_json <- function(path) {
-  lines <- remove_comments(readLines(path))
-  lst <- jsonlite::parse_json(lines)
-  lst <- complete_params_with_defaults(lst)
-}
+# perform some checks on the parameters, mainly to avoid crashing in C++ code.
+check_params <- function(params, nb_out_vars) {
+  # output_vars_defuzz_thresholds
+  param <- params$fitness_params$output_vars_defuzz_thresholds
+  stop_if((length(param) == 1 && is.na(param)) || length(param) != nb_out_vars, 
+    'bad param "output_vars_defuzz_thresholds", must be of length %i', nb_out_vars)
 
-complete_params_with_defaults <- function(lst) {
-  defaults <- params(NA, NA)
-  lst <- lst %||% list()
-  utils::modifyList(defaults, lst)
+ 
 }
 
 #' utility to build the Fuzzy Coco parameters data structure
@@ -65,7 +73,7 @@ params <- function(nb_rules, nb_max_var_per_rule,
   mfs.mut_flip_genome = 0.5,
   mfs.mut_flip_bit = 0.025,
 
-  output_vars_defuzz_thresholds = list(),
+  output_vars_defuzz_thresholds = NA,
 
   metricsw.sensitivity = 1.0,
   metricsw.specificity = 0.8,

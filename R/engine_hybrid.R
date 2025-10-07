@@ -2,7 +2,15 @@
 
 
 # just a wrapper on FuzzyCocoWrapper
-new_hybrid_engine <- function(data, nb_out_vars, params, seed, verbose = FALSE) {
+new_hybrid_engine <- function(mode = c("classification", "regression"), data, nb_out_vars, params, seed, verbose = FALSE) {
+  mode <- match.arg(mode)
+  stop_unless(is.data.frame(data), "data must be a data.frame.")
+
+  # build the response data
+  y <- data[seq.int(length.out = nb_out_vars, to = length(data))]
+  params <- resolve_params(params, y, mode == REGRESSION)
+  check_params(params, nb_out_vars)
+  
   new(FuzzyCocoWrapper, data, nb_out_vars, params, seed, verbose)
 }
 
@@ -45,26 +53,14 @@ get_current_generation_fitness <- function(engine) {
 #' @inheritParams shared_params
 #' @export
 #' @examples
-#'  x <- mtcars[c("mpg", "hp", "wt")]
-#'  y <- mtcars["qsec"]
-#'  pms <- params(
-#'    nb_rules = 2, nb_max_var_per_rule = 3, rules.pop_size = 20, mfs.pop_size = 20, 
-#'    ivars.nb_sets = 3, ivars.nb_bits_vars = 3,  ivars.nb_bits_sets = 2, ivars.nb_bits_pos = 8, 
-#'    ovars.nb_sets = 3, ovars.nb_bits_vars = 1, ovars.nb_bits_sets = 2, ovars.nb_bits_pos = 8, 
-#'    metricsw.sensitivity = 0, metricsw.specificity = 0, metricsw.rmse = 1,
-#'    output_vars_defuzz_thresholds = 17
-#'  )
-#'  model <- fuzzycoco("regression", pms)
-#' 
-#'  fit <- fuzzycoco_fit_df_hybrid(model, x, y)
+#'  model <- fuzzycoco("regression", example_mtcars()$params)
+#'  fit <- fuzzycoco_fit_df_hybrid(model, mtcars[c("mpg", "hp", "wt")],  mtcars["qsec"])
 fuzzycoco_fit_df_hybrid <- function(model, x, y, 
   until = stop_engine_on_first_of(
     max_generations = model$params$global_params$max_generations, 
     max_fitness = model$params$global_params$max_fitness
   ), verbose = model$verbose, progress = TRUE) 
 {
-  stop_unless(length(model$params$fitness_params$output_vars_defuzz_thresholds) == ncol(y),
-    "bad params$fitness_params$output_vars_defuzz_thresholds, must be defined for all output vars")
 
   progressr <- progress && requireNamespace("progressr")
   max_gen <- until() %||% model$params$global_params$max_generations
@@ -73,7 +69,7 @@ fuzzycoco_fit_df_hybrid <- function(model, x, y,
 
   data <- cbind(x, y)
 
-  engine <- new_hybrid_engine(data, ncol(y), model$params, model$seed, verbose = verbose)
+  engine <- new_hybrid_engine(model$mode, data, ncol(y), model$params, model$seed, verbose = verbose)
   start_engine(engine)
   # if (progress) pb$tick(0)
   last_fitness <- last_percent <- it <- 0
@@ -98,10 +94,10 @@ fuzzycoco_fit_df_hybrid <- function(model, x, y,
 
 #' an utility function to easily generate the commonly used `until` parameter, as used by [fuzzycoco_fit_df_hybrid()]
 #' 
-#' @param other_func    if not NULL, a function engine -->logical that should return TRUE to stop the evolution 
+#' @param other_func    if not NULL, a function: (engine) -->logical that should return TRUE to stop the evolution 
 #'  (cf [stop_engine_if_stalling()]) 
 #' @inheritParams shared_params
-#' @return a function engine --> logical that stops (i.e/ returns TRUE) when the number of generations or the fitness
+#' @return a function: (engine) --> logical that stops (i.e/ returns TRUE) when the number of generations or the fitness
 #'  are reached, or when the `other_func` if provided returns TRUE
 #' @export
 #' @examples
@@ -126,7 +122,7 @@ stop_engine_on_first_of <- function(max_generations = NULL, max_fitness = NULL, 
 #' 
 #' @param nb_iterations    number of iterations of the stalling: stops if the fitness has not increased during that
 #'  number of iterations.
-#' @return a function engine --> logical that stops (i.e/ returns TRUE) if the convergence is stalling
+#' @return a function: (engine) --> logical that stops (i.e/ returns TRUE) if the convergence is stalling
 #' @export
 #' @examples
 #' until <- stop_engine_on_first_of(max_generations = 1000, other_func = stop_engine_if_stalling(5))

@@ -17,11 +17,11 @@ Each iteration produces a new generation of the rules and membership functions p
 \item{max_fitness}{a stop condition: the iterations stop as soon as a generated fuzzy system fitness
 reaches that threshold.}
 
-\item{other_func}{if not NULL, a function engine -->logical that should return TRUE to stop the evolution
+\item{other_func}{if not NULL, a function: (engine) -->logical that should return TRUE to stop the evolution
 (cf \code{\link[=stop_engine_if_stalling]{stop_engine_if_stalling()}})}
 }
 \value{
-a function engine --> logical that stops (i.e/ returns TRUE) when the number of generations or the fitness
+a function: (engine) --> logical that stops (i.e/ returns TRUE) when the number of generations or the fitness
 are reached, or when the \code{other_func} if provided returns TRUE
 }
 \description{

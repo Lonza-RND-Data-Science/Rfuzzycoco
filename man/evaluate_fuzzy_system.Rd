@@ -16,8 +16,21 @@ evaluate_fuzzy_system(fs, data, params, verbose = FALSE)
 \item{verbose}{whether to be verbose}
 }
 \value{
-the evaluation as a named list
+the evaluation as a named list:
+\itemize{
+\item fitness: the fitness value
+\item metrics: the evaluation metrics as a named list
+}
 }
 \description{
 evaluate the fuzzy system from a fit on some given data
+}
+\examples{
+model <- fuzzycoco("regression", example_mtcars()$params, seed = 123)
+x <- mtcars[c("mpg", "hp", "wt")]
+y <- mtcars["qsec"]
+fit <- fit_xy(model, x, y, progress = FALSE)
+
+res <- evaluate_fuzzy_system(fit$fuzzy_system, cbind(x, y), fit$params)
+print(res$metrics$rmse)
 }

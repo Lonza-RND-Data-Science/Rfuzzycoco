@@ -45,8 +45,17 @@ It is a way for the user to customize the stop conditions of the algorithm.}
   }}
 }
 \value{
-a named list
+the fit as a named list
 }
 \description{
-fit the FuzzyCoco model using the dataframe interface
+N.B: the underlying C++ implementation is able to automatically set some missing parameters (NA).
+The final parameters are those returned by the function, is the \code{params} slot.
+}
+\examples{
+model <- fuzzycoco("regression", example_mtcars()$params, seed = 123)
+x <- mtcars[c("mpg", "hp", "wt")]
+y <- mtcars["qsec"]
+fit <- fit_xy(model, x, y, progress = FALSE)
+print(names(fit))
+
 }

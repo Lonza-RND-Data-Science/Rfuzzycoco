@@ -1,6 +1,9 @@
 TODO with Rfuzzycoco
 =====================
 
+## improvements
+
+- add more features to resolve_params()
 
 ## problems?
 

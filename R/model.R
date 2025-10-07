@@ -5,7 +5,7 @@ REGRESSION <- "regression"
 #' 
 #' @inheritParams shared_params
 #' 
-#' @return a *fuzzycoco_model*  object (named list)
+#' @return a *fuzzycoco_model* object (named list)
 #' @export
 #' @examples
 #' model <- fuzzycoco("regression", params(nb_rules = 1, nb_max_var_per_rule = 3), seed = 123)

@@ -43,8 +43,15 @@ reaches that threshold.}
   }}
 }
 \value{
-a named list
+the fit as a named list
 }
 \description{
-fit the FuzzyCoco model using the formula interface
+N.B: \code{fix_xy()} is the workhorse, \code{fit()} is a simple formula-based layer
+}
+\examples{
+model <- fuzzycoco("regression", example_mtcars()$params, seed = 123)
+df <- mtcars[c("mpg", "hp", "wt", "qsec")]
+fit <- fit(model, qsec ~ ., df, seed = 456, max_generations = 10, progress = FALSE)
+print(names(fit))
+
 }

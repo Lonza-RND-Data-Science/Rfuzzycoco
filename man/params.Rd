@@ -30,7 +30,7 @@ params(
   mfs.cx_prob = 0.5,
   mfs.mut_flip_genome = 0.5,
   mfs.mut_flip_bit = 0.025,
-  output_vars_defuzz_thresholds = list(),
+  output_vars_defuzz_thresholds = NA,
   metricsw.sensitivity = 1,
   metricsw.specificity = 0.8,
   metricsw.accuracy = 0,

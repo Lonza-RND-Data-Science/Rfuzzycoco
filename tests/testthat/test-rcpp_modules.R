@@ -1,6 +1,6 @@
 .FuzzyCocoWrapper <- 
 test_that("FuzzyCocoWrapper", {
-  CASE <- IRIS36()
+  CASE <- example_iris36()
 
   lst <- params(3L, 2L, rules.pop_size = 10L, mfs.pop_size = 20L, ivars.nb_bits_pos = 8L, ovars.nb_bits_pos = 3L)
   lst$fitness_params$output_vars_defuzz_thresholds <- list(0.5)
@@ -20,7 +20,7 @@ test_that("FuzzyCocoWrapper", {
   expect_equal(gen_desc$fitness,  0)
   expect_equal(gen_desc$generation_number,  0)
 
-  rules_pop = gen_desc$rules_population
+  rules_pop <- gen_desc$rules_population
   expect_identical(names(rules_pop), c("individuals", "elite"))
   expect_length(rules_pop$individuals, lst$rules_params$pop_size)
   expect_length(rules_pop$elite, lst$rules_params$elite_size)
@@ -49,7 +49,7 @@ test_that("FuzzyCocoWrapper", {
 
 .multi_convergence <- 
 test_that("multi_convergence", {
-  CASE <- IRIS36()
+  CASE <- example_iris36()
   df <- CASE$data
 
   lst <- params(3L, 2L, rules.pop_size = 10L, mfs.pop_size = 20L, ivars.nb_bits_pos = 8L, ovars.nb_bits_pos = 3L)

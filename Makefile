@@ -4,7 +4,7 @@ rox:
 	Rscript --no-save -e 'devtools::document()'
 
 build: rox
-	Rscript --no-save -e 'devtools::build()'
+	Rscript --no-save -e 'devtools::build(manual = TRUE, path = ".")'
 
 compile:
 	Rscript --no-save -e 'pkgbuild::compile_dll(debug = FALSE)'

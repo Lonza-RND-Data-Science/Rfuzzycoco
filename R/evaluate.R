@@ -4,7 +4,17 @@
 #' @param x the fuzzycoco_fit object containing the fuzzy system to evaluate
 #' @param ...   not used. Only for S3 generic consistency
 #' @inherit evaluate_fuzzy_system
+#' @return the evaluation as a named list:
+#'  - fitness: the fitness value
+#'  - metrics: the evaluation metrics as a named list
 #' @export
+#' @examples
+#' model <- fuzzycoco("regression", example_mtcars()$params, seed = 123)
+#' df <- mtcars[c("mpg", "hp", "wt", "qsec")]
+#' fit <- fit(model, qsec ~ ., df, engine = "rcpp", seed = 456, max_generations = 20)
+#' 
+#' res <- evaluate(fit, df)
+#' print(res$fitness)
 evaluate.fuzzycoco_fit <- function(x, data, verbose = FALSE, ...) 
 {
   evaluate_fuzzy_system(x$fuzzy_system, data, x$params, verbose = verbose)
@@ -18,8 +28,18 @@ evaluate.fuzzycoco_fit <- function(x, data, verbose = FALSE, ...)
 #' @param params    the fuzzycoco parameters. probably not needed...
 #' @inheritParams shared_params
 #' 
-#' @return the evaluation as a named list
+#' @return the evaluation as a named list:
+#'  - fitness: the fitness value
+#'  - metrics: the evaluation metrics as a named list
 #' @export
+#' @examples
+#' model <- fuzzycoco("regression", example_mtcars()$params, seed = 123)
+#' x <- mtcars[c("mpg", "hp", "wt")]
+#' y <- mtcars["qsec"]
+#' fit <- fit_xy(model, x, y, progress = FALSE)
+#' 
+#' res <- evaluate_fuzzy_system(fit$fuzzy_system, cbind(x, y), fit$params)
+#' print(res$metrics$rmse)
 evaluate_fuzzy_system <- function(fs, data, params, verbose = FALSE) 
 {
   nb_vars <- length(fs$variables$input) + length(fs$variables$output)

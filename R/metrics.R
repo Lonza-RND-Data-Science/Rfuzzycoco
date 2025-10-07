@@ -1,11 +1,11 @@
 
 
-# creata a function that applies a metric based on comparing two columns on all corresponding columns of 2 dfs 
+# creates  a function that applies a metric based on comparing two columns on all corresponding columns of 2 dfs 
 apply_column_metric_to_dfs <- function(metric, aggregate = mean) {
   function(df, df0) {
     stop_unless(ncol(df) == ncol(df0), "error, must have the same number of columns")
     .process_col <- function(col) metric(df[[col]], df0[[col]])
-    res_by_col <- sapply(seq_along(df), .process_col)
+    res_by_col <- vapply(seq_along(df), .process_col, 0)
     aggregate(res_by_col)
   }
 }

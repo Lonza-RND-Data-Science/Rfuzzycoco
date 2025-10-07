@@ -10,11 +10,18 @@ fs_rules_to_df(fuzzy_system_desc)
 \item{fuzzy_system_desc}{a fuzzy system description as a named list}
 }
 \value{
-a data frame, one row per rule, including the default rule, in columns the input and ouput variables.
+a data frame, one row per rule, including the default rule, in columns the input and output variables.
 The values are the corresponding fuzzy set number.
 }
 \description{
 format the fuzzy rules as a data frame
+}
+\examples{
+model <- fuzzycoco("regression", example_mtcars()$params, seed = 123)
+df <- mtcars[c("mpg", "hp", "wt", "qsec")]
+fit <- fit(model, qsec ~ ., df, seed = 456, max_generations = 10, progress = FALSE)
+
+print(fs_rules_to_df(fit$fuzzy_system))
 }
 \seealso{
 Other fit_utils: 

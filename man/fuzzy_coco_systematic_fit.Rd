@@ -25,3 +25,20 @@ This is a R implementation of a systematic search, where the fuzzy set positions
 by the distribution of the data (cf \code{\link[=compute_optimal_quantile_fuzzy_set_positions]{compute_optimal_quantile_fuzzy_set_positions()}} and the rules
 are systematically explored
 }
+\details{
+N.B: this is experimental, only possible for a small number of variables.
+Not all parameters are used, obviously, and currently fitness_params$output_vars_defuzz_thresholds
+has to be set explicitly.
+}
+\examples{
+fitter <- function(metrics) 2^-metrics$rms
+params <- example_mtcars()$params
+params$fitness_params$output_vars_defuzz_thresholds <- 0
+params$global_params$nb_rules <- 1
+params$global_params$nb_max_var_per_rule <- 2
+params$output_vars_params$nb_sets <- 2
+
+x <- mtcars[c("mpg", "hp", "wt")]
+y <- mtcars["qsec"]
+fit <- fuzzy_coco_systematic_fit(x, y, params, fitter)
+}

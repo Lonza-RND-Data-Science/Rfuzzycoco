@@ -1,6 +1,6 @@
 .preprocess_data_with_formula <- 
 test_that("preprocess_data_with_formula", {
-  CASE <- MTCARS_MULTI_OUTPUT()
+  CASE <- example_mtcars()
 
   ### one response already at the end of the df
   lst <- preprocess_data_with_formula(qsec ~ ., CASE$data)

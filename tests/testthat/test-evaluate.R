@@ -1,11 +1,10 @@
 .evaluate.fuzzycoco_fit <- 
 test_that("evaluate.fuzzycoco_fit", {
-  CASE <- MTCARS_MULTI_OUTPUT()
+  CASE <- example_mtcars()
   df <- CASE$data
   pms <- CASE$params
 
   ####################### regression one variable: hp ########################
-  pms$fitness_params$output_vars_defuzz_thresholds <- 100
   model <- fuzzycoco("regression", pms, seed = 123)
   x <- df[-2]
   y <- df[2]
@@ -23,7 +22,6 @@ test_that("evaluate.fuzzycoco_fit", {
 
 
   ####################### regression 2 variables and 2 regressors ########################
-  pms$fitness_params$output_vars_defuzz_thresholds <- list(20, 150)
   model <- fuzzycoco("regression", pms, seed = 123)
   responses <- c("qsec", "hp")
   x <- df[setdiff(names(df), responses)]; y <- df[responses]
@@ -46,6 +44,7 @@ test_that("evaluate.fuzzycoco_fit", {
   x <- df[setdiff(names(df), response)]
   y0 <- df[response]
   y <- bin_continuous_responses_to_01(y0)
+
   fit <- fit_xy(model, x, y, engine = "rcpp", max_generations = 30)
 
   res <- evaluate(fit, cbind(y, x))
@@ -68,3 +67,4 @@ test_that("evaluate.fuzzycoco_fit", {
   ref$generations <- NULL
   expect_equal(res, ref)
 })
+

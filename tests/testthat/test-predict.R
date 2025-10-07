@@ -1,10 +1,10 @@
 .predict.fuzzycoco_fit <- 
 test_that("predict.fuzzycoco_fit", {
-  CASE <- MTCARS_MULTI_OUTPUT()
+  CASE <- example_mtcars()
   df <- CASE$data
   pms <- CASE$params
   # N.B: no threshold set
-  pms$fitness_params$output_vars_defuzz_thresholds <- list()
+
 
   ####################### classification one variable ########################
   pms$output_vars_params$nb_sets <- 2

@@ -23,6 +23,13 @@ fuzzy_coco_parsnip(
 
 \item{verbose}{whether to be verbose}
 }
+\value{
+a parsnip model
+}
 \description{
 parsnip model function
+}
+\examples{
+spec <- fuzzy_coco_parsnip("regression",  params = example_mtcars()$params, seed = 123)
+fit <- spec |> parsnip::set_engine("hybrid") |> parsnip::fit(qsec ~ ., data = example_mtcars()$data)
 }

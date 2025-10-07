@@ -19,6 +19,13 @@ a one-row data frame
 a one-row overview of a fuzzy system with the usage of variables, the fitness, number of generations and optionally
 a metric
 }
+\examples{
+model <- fuzzycoco("regression", example_mtcars()$params, seed = 123)
+df <- mtcars[c("mpg", "hp", "wt", "qsec")]
+fit <- fit(model, qsec ~ ., df, seed = 456, max_generations = 10, progress = FALSE)
+
+print(fit_to_df(fit))
+}
 \seealso{
 Other fit_utils: 
 \code{\link{fs_rules_to_df}()},

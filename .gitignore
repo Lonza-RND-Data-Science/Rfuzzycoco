@@ -4,3 +4,4 @@ inst/doc
 docs
 /doc/
 /Meta/
+*.tar.gz
