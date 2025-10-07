@@ -41,6 +41,7 @@ fuzzy_coco_parsnip <- function(mode = "unknown", params,
 #' @return either a prediction (cf [predict()]), a fit (cf [fit()]) or the prediction probabilities
 #'  as a named numeric vector
 #' @keywords internal
+#' @export
 fuzzy_coco_parsnip_wrapper <- function(formula, data, object = NULL, internal_model = NULL, engine = NULL, 
   fit = NULL, df = NULL, pred = FALSE, type = NULL, ...) {
 
