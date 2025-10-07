@@ -43,7 +43,7 @@ reaches that threshold.}
   }}
 }
 \value{
-a named list
+the fit as a named list
 }
 \description{
 N.B: \code{fix_xy()} is the workhorse, \code{fit()} is a simple formula-based layer

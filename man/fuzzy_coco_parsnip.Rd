@@ -23,6 +23,9 @@ fuzzy_coco_parsnip(
 
 \item{verbose}{whether to be verbose}
 }
+\value{
+a parsnip model
+}
 \description{
 parsnip model function
 }

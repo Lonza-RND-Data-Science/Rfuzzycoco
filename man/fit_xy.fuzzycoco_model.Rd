@@ -45,7 +45,7 @@ It is a way for the user to customize the stop conditions of the algorithm.}
   }}
 }
 \value{
-a named list
+the fit as a named list
 }
 \description{
 N.B: the underlying C++ implementation is able to automatically set some missing parameters (NA).

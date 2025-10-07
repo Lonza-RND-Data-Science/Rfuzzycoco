@@ -16,7 +16,11 @@ evaluate_fuzzy_system(fs, data, params, verbose = FALSE)
 \item{verbose}{whether to be verbose}
 }
 \value{
-the evaluation as a named list
+the evaluation as a named list:
+\itemize{
+\item fitness: the fitness value
+\item metrics: the evaluation metrics as a named list
+}
 }
 \description{
 evaluate the fuzzy system from a fit on some given data

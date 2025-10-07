@@ -16,7 +16,11 @@
 \item{...}{not used. Only for S3 generic consistency}
 }
 \value{
-the evaluation as a named list
+the evaluation as a named list:
+\itemize{
+\item fitness: the fitness value
+\item metrics: the evaluation metrics as a named list
+}
 }
 \description{
 N.B: just a S3 method method wrapping the \code{\link[=evaluate_fuzzy_system]{evaluate_fuzzy_system()}} function

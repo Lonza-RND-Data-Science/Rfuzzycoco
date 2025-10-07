@@ -26,6 +26,10 @@ fuzzy_coco_parsnip_wrapper(
 
 \item{engine}{the fuzzy coco fit engine to use, one of \strong{rcpp} and \strong{hybrid}}
 }
+\value{
+either a prediction (cf \code{\link[=predict]{predict()}}), a fit (cf \code{\link[=fit]{fit()}}) or the prediction probabilities
+as a named numeric vector
+}
 \description{
 It should not be exported, it only is because of parsnip internal implementation
 }

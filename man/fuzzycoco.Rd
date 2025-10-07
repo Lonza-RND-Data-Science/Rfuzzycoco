@@ -21,7 +21,7 @@ fuzzycoco(
 \item{verbose}{whether to be verbose}
 }
 \value{
-a \emph{fuzzycoco_model}  object (named list)
+a \emph{fuzzycoco_model} object (named list)
 }
 \description{
 creates a model for the Fuzzy Coco algorithm

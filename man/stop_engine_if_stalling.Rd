@@ -11,7 +11,7 @@ stop_engine_if_stalling(nb_iterations)
 number of iterations.}
 }
 \value{
-a function engine --> logical that stops (i.e/ returns TRUE) if the convergence is stalling
+a function: (engine) --> logical that stops (i.e/ returns TRUE) if the convergence is stalling
 }
 \description{
 an utility function to easily generate a stop function that stops when the convergence is stalling
