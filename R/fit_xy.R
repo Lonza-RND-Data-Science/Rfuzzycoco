@@ -30,7 +30,7 @@ fit_xy.fuzzycoco_model <- function(object, x, y, engine = FUZZY_COCO_HYBRID_ENGI
 
   if (is_regression) {
     # check that the response variables are numeric
-    not_nums <- which(!sapply(y, is.numeric))
+    not_nums <- which(!vapply(y, is.numeric, TRUE))
     stop_if(length(not_nums), "error, non numerical response(s): %s", names(not_nums))
   } else {
     # check output var params for classification: --> only 2 output fuzzy sets

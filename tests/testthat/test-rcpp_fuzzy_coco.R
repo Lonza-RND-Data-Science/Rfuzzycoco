@@ -87,8 +87,8 @@ test_that("iris36", {
 
 
 
-.multi_ouput <- 
-test_that("multi_ouput", {
+.multi_output <- 
+test_that("multi_output", {
   CASE <- example_mtcars()
   df <- CASE$data
 

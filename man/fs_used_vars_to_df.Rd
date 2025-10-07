@@ -10,7 +10,7 @@ fs_used_vars_to_df(fuzzy_system_desc)
 \item{fuzzy_system_desc}{a fuzzy system description as a named list}
 }
 \value{
-a one-row data frame, in columns the input and ouput variables, with TRUE iff the variable is used.
+a one-row data frame, in columns the input and output variables, with TRUE iff the variable is used.
 }
 \description{
 extract the usage of the variables by a fuzzy system

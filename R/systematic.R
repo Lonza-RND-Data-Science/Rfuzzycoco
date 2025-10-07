@@ -80,7 +80,7 @@ fuzzy_coco_systematic_fit <- function(x, y, params, fitter) {
     fitter(res$metrics)
   }
 
-  res <- sapply(seq_len(nrow(grid)), .process_row)
+  res <- vapply(seq_len(nrow(grid)), .process_row, 0)
 
   best_value <- max(res)
   best_idx <- which(res == best_value)

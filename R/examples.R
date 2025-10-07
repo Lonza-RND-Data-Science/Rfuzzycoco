@@ -16,14 +16,14 @@ example_mtcars <- function() {
   )
 
   list(
-      data = mtcars[c("mpg", "hp", "wt", "qsec")], 
+      data = datasets::mtcars[c("mpg", "hp", "wt", "qsec")], 
       params = pms
   )
 }
 
 #' model parameters and data for the IRIS36 classification example
 #' 
-#' a small (36 rows) dataset extracted from iris with a binary 0/1 outcome `OUT` respnse variable 
+#' a small (36 rows) dataset extracted from iris with a binary 0/1 outcome `OUT` response variable 
 #'
 #' @return the example as a named list with:
 #'  -  params: the model parameters
@@ -31,7 +31,8 @@ example_mtcars <- function() {
 #' @export
 #' @examples 
 #'  model <- fuzzycoco("classification", example_iris36()$params, seed = 123)
-#'  fit <- fit(model, OUT ~ ., example_iris36()$data, max_generations = 20, progress = FALSE)
+#'  fit <- fit(model, OUT ~ ., example_iris36()$data, 
+#'  max_generations = 20, progress = FALSE)
 example_iris36 <- function() {
  pms <- params(
     nb_rules = 3, nb_max_var_per_rule = 3, 
@@ -45,7 +46,7 @@ example_iris36 <- function() {
   zeroes <- c(2:5, 7, 11, 14, 16, 19, 26, 30, 32:36, 40, 47)
   ones <- c(51, 53:54, 57, 59, 61:62, 72, 74, 76:77, 80:83, 87, 90, 99)
 
-  df <- iris[c(zeroes, ones + 50), ]
+  df <- datasets::iris[c(zeroes, ones + 50), ]
   df$Species <- NULL
   df$OUT <- c(rep(0, length(zeroes)), rep(1, length(zeroes)))
   list(
@@ -65,8 +66,10 @@ example_iris36 <- function() {
 #' @export
 #' @examples 
 #'  model <- fuzzycoco("classification", example_iris_binary_categorical()$params)
-#'  fit <- fit(model, Species ~ ., example_iris_binary_categorical()$data, max_generations = 20, progress = FALSE)
+#'  fit <- fit(model, Species ~ ., example_iris_binary_categorical()$data, 
+#'  max_generations = 20, progress = FALSE)
 example_iris_binary_categorical <- function() {
+  iris <- datasets::iris
   df <- rbind(head(iris), tail(iris))
   df$Species <- as.character(df$Species)
 

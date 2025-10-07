@@ -14,9 +14,10 @@ the example as a named list with:
 }
 }
 \description{
-a small (36 rows) dataset extracted from iris with a binary 0/1 outcome \code{OUT} respnse variable
+a small (36 rows) dataset extracted from iris with a binary 0/1 outcome \code{OUT} response variable
 }
 \examples{
  model <- fuzzycoco("classification", example_iris36()$params, seed = 123)
- fit <- fit(model, OUT ~ ., example_iris36()$data, max_generations = 20, progress = FALSE)
+ fit <- fit(model, OUT ~ ., example_iris36()$data, 
+ max_generations = 20, progress = FALSE)
 }

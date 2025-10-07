@@ -20,7 +20,7 @@ test_that("FuzzyCocoWrapper", {
   expect_equal(gen_desc$fitness,  0)
   expect_equal(gen_desc$generation_number,  0)
 
-  rules_pop = gen_desc$rules_population
+  rules_pop <- gen_desc$rules_population
   expect_identical(names(rules_pop), c("individuals", "elite"))
   expect_length(rules_pop$individuals, lst$rules_params$pop_size)
   expect_length(rules_pop$elite, lst$rules_params$elite_size)

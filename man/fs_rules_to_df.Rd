@@ -10,7 +10,7 @@ fs_rules_to_df(fuzzy_system_desc)
 \item{fuzzy_system_desc}{a fuzzy system description as a named list}
 }
 \value{
-a data frame, one row per rule, including the default rule, in columns the input and ouput variables.
+a data frame, one row per rule, including the default rule, in columns the input and output variables.
 The values are the corresponding fuzzy set number.
 }
 \description{

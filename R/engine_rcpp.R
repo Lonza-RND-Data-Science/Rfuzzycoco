@@ -2,7 +2,7 @@
 fuzzycoco_fit_df_rcpp <- function(model, data, responses = tail(names(data), 1), verbose = model$verbose) {
   stop_unless(is.data.frame(data), "bad arg 'data': not a data.frame") 
   # check all column types: currently only numeric
-  bad_cols <- which(!sapply(data, is.numeric))
+  bad_cols <- which(!vapply(data, is.numeric, TRUE))
   stop_if(length(bad_cols), "bad column(s) '%s', only numeric columns are allowed", names(bad_cols))
 
   stop_unless(length(responses) > 0, "bad arg 'responses': empty")

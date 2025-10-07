@@ -2,7 +2,7 @@
 #' format the fuzzy rules as a data frame
 #' 
 #' @inheritParams shared_params
-#' @return a data frame, one row per rule, including the default rule, in columns the input and ouput variables.
+#' @return a data frame, one row per rule, including the default rule, in columns the input and output variables.
 #'  The values are the corresponding fuzzy set number.
 #' @family fit_utils 
 #' @export
@@ -49,7 +49,7 @@ fs_rules_to_df <- function(fuzzy_system_desc) {
 #' extract the usage of the variables by a fuzzy system
 #' 
 #' @inheritParams shared_params
-#' @return a one-row data frame, in columns the input and ouput variables, with TRUE iff the variable is used.
+#' @return a one-row data frame, in columns the input and output variables, with TRUE iff the variable is used.
 #' @family fit_utils 
 #' @export
 #' @examples 
