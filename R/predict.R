@@ -5,6 +5,7 @@
 #' @param bin   whether to transform the output data into a binary response. Only applies to classification models.
 #' @param ...   not used. Only for S3 generic consistency
 #' @inherit predict_fuzzy_system
+#' @return the predicted output data as a data frame
 #' @export
 #' @examples
 #' model <- fuzzycoco("regression", example_mtcars()$params, seed = 123)

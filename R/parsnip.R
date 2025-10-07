@@ -7,6 +7,7 @@ FUZZY_COCO_MODEL <- "fuzzy_coco"
 #' parsnip model function
 #' 
 #' @inheritParams shared_params
+#' @return a parsnip model
 #' @export
 #' @examples 
 #' spec <- fuzzy_coco_parsnip("regression",  params = example_mtcars()$params, seed = 123)
@@ -37,7 +38,8 @@ fuzzy_coco_parsnip <- function(mode = "unknown", params,
 #' It should not be exported, it only is because of parsnip internal implementation
 #' @param object,internal_model,fit,df,pred,type,... no comment
 #' @inheritParams shared_params
-#' @export
+#' @return either a prediction (cf [predict()]), a fit (cf [fit()]) or the prediction probabilities
+#'  as a named numeric vector
 #' @keywords internal
 fuzzy_coco_parsnip_wrapper <- function(formula, data, object = NULL, internal_model = NULL, engine = NULL, 
   fit = NULL, df = NULL, pred = FALSE, type = NULL, ...) {

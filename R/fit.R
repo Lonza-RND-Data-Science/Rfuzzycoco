@@ -10,7 +10,7 @@
 #' @inherit fit_xy.fuzzycoco_model
 #' @inheritDotParams fit_xy.fuzzycoco_model 
 #' @inheritParams shared_params
-#' @return a named list 
+#' @return the fit as a named list
 #' @export
 #' @examples
 #' model <- fuzzycoco("regression", example_mtcars()$params, seed = 123)

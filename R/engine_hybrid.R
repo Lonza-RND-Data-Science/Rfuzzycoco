@@ -94,10 +94,10 @@ fuzzycoco_fit_df_hybrid <- function(model, x, y,
 
 #' an utility function to easily generate the commonly used `until` parameter, as used by [fuzzycoco_fit_df_hybrid()]
 #' 
-#' @param other_func    if not NULL, a function engine -->logical that should return TRUE to stop the evolution 
+#' @param other_func    if not NULL, a function: (engine) -->logical that should return TRUE to stop the evolution 
 #'  (cf [stop_engine_if_stalling()]) 
 #' @inheritParams shared_params
-#' @return a function engine --> logical that stops (i.e/ returns TRUE) when the number of generations or the fitness
+#' @return a function: (engine) --> logical that stops (i.e/ returns TRUE) when the number of generations or the fitness
 #'  are reached, or when the `other_func` if provided returns TRUE
 #' @export
 #' @examples
@@ -122,7 +122,7 @@ stop_engine_on_first_of <- function(max_generations = NULL, max_fitness = NULL, 
 #' 
 #' @param nb_iterations    number of iterations of the stalling: stops if the fitness has not increased during that
 #'  number of iterations.
-#' @return a function engine --> logical that stops (i.e/ returns TRUE) if the convergence is stalling
+#' @return a function: (engine) --> logical that stops (i.e/ returns TRUE) if the convergence is stalling
 #' @export
 #' @examples
 #' until <- stop_engine_on_first_of(max_generations = 1000, other_func = stop_engine_if_stalling(5))

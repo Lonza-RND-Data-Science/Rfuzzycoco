@@ -4,6 +4,9 @@
 #' @param x the fuzzycoco_fit object containing the fuzzy system to evaluate
 #' @param ...   not used. Only for S3 generic consistency
 #' @inherit evaluate_fuzzy_system
+#' @return the evaluation as a named list:
+#'  - fitness: the fitness value
+#'  - metrics: the evaluation metrics as a named list
 #' @export
 #' @examples
 #' model <- fuzzycoco("regression", example_mtcars()$params, seed = 123)
@@ -25,7 +28,9 @@ evaluate.fuzzycoco_fit <- function(x, data, verbose = FALSE, ...)
 #' @param params    the fuzzycoco parameters. probably not needed...
 #' @inheritParams shared_params
 #' 
-#' @return the evaluation as a named list
+#' @return the evaluation as a named list:
+#'  - fitness: the fitness value
+#'  - metrics: the evaluation metrics as a named list
 #' @export
 #' @examples
 #' model <- fuzzycoco("regression", example_mtcars()$params, seed = 123)
