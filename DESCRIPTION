@@ -1,6 +1,6 @@
 Type: Package
 Package: Rfuzzycoco
-Title: Provides an R Interface to the FuzzyCoCo C++ Library and Extends It
+Title: Provides an R Interface to the 'FuzzyCoCo' C++ Library and Extends It
 Version: 0.1.0
 Authors@R: 
     person("Karl", "Forner", , "karl.forner@gmail.com", role = c("aut", "cre"))

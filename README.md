@@ -4,7 +4,7 @@
 <!-- badges: start -->
 
 [![R-CMD-check](https://github.com/Lonza-RND-Data-Science/Rfuzzycoco/actions/workflows/R-CMD-check.yaml/badge.svg?branch=main)](https://github.com/Lonza-RND-Data-Science/Rfuzzycoco/actions/workflows/R-CMD-check.yaml)
-[![codecov](https://codecov.io/gh/Lonza-RND-Data-Science/Rfuzzycoco/graph/badge.svg?token=DNSmWrcvFd)](https://codecov.io/gh/Lonza-RND-Data-Science/Rfuzzycoco)
+[![codecov](https://codecov.io/gh/Lonza-RND-Data-Science/Rfuzzycoco/graph/badge.svg?token=DNSmWrcvFd)](https://app.codecov.io/gh/Lonza-RND-Data-Science/Rfuzzycoco)
 [![License: AGPL-3.0-or-later](https://img.shields.io/badge/license-AGPL--3.0--or--later-success)](https://www.gnu.org/licenses/agpl-3.0.html)
 <!-- badges: end -->
 
