@@ -12,12 +12,12 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
+old <- options(width = 200)
+```
 
 ```{r setup}
 library(Rfuzzycoco)
-options(width = 200)
 ```
-
 
 
 # data and parameters
@@ -116,4 +116,9 @@ y2 <- predict(fit, x)
 rmse2 <- sqrt(mean((y2[[1]] - y[[1]])^2))
 # compare it to what was reported
 all.equal(rmse2,  fit$fit$metrics$rmse)
+```
+
+```{r cleanup, include = FALSE}
+# restoring options
+options(old)
 ```
